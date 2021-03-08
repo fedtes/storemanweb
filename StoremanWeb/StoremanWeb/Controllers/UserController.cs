@@ -37,7 +37,7 @@ namespace StoremanWeb.Controllers
 
         [HttpPost]
         [Route("login")]
-        public ActionResult Login([FromBody]LoginModel login)
+        public ActionResult Login([FromBody]Login login)
         {
             if (!Regex.IsMatch(login.username, "[a-zA-Z0-9_.@]+"))
                 return StatusCode(400);
@@ -45,7 +45,7 @@ namespace StoremanWeb.Controllers
             if (!userService.ValidatePassword(login.username, login.password))
                 return StatusCode(401);
 
-            UserModel user = userService.GetUser(login.username);
+            User user = userService.GetUser(login.username);
             Response.Cookies.Append("refresh_token", jWTTokenService.GetRefreshToken(user), new CookieOptions() { HttpOnly = true, Expires = System.DateTimeOffset.Now.AddHours(8) });
             return new JsonResult(new
             {
@@ -73,7 +73,7 @@ namespace StoremanWeb.Controllers
             else
             {
                 var userId = claim.NameIdentifier();
-                UserModel user = userService.GetUser(int.Parse(userId));
+                User user = userService.GetUser(int.Parse(userId));
                 return new JsonResult(new
                 {
                     token = jWTTokenService.GetToken(user),

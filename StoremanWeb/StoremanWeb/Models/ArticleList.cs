@@ -9,6 +9,15 @@ namespace StoremanWeb.Models
     {
         public int ID;
         public string Descrizione;
+
+        /// <summary>
+        /// 0 = draft; 1 = alive; 2 = deleted
+        /// </summary>
+        public int HistoryStatus;
+
+        /// <summary>
+        /// [Da Scaricare; Scaricata]
+        /// </summary>
         public string Stato;
     }
 }

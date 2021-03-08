@@ -20,7 +20,7 @@ namespace StoremanWeb.Services
             this.configuration = configuration;
         }
 
-        public string GetToken(UserModel user)
+        public string GetToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var identity = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()) });
@@ -29,7 +29,7 @@ namespace StoremanWeb.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public string GetRefreshToken(UserModel user)
+        public string GetRefreshToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var identity = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.NameIdentifier, user.ID.ToString()) });

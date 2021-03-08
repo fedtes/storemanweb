@@ -1,20 +1,20 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+using Microsoft.Extensions.Configuration;
+using SqlKata.Execution;
+using System.Data.SQLite;
 
 namespace StoremanWeb.Services
 {
     public class DBService
     {
         private readonly IConfiguration configuration;
-        public MySqlConnector.MySqlConnection connection { get; private set; }
+        public QueryFactory DBContext { get; private set; }
 
         public DBService(IConfiguration configuration)
         {
             this.configuration = configuration;
-            this.connection = new MySqlConnector.MySqlConnection(configuration["App:ConnectionString"]);
+            var connection = new SQLiteConnection(configuration["App:ConnectionString"]);
+            this.DBContext = new QueryFactory(connection, new SqlKata.Compilers.SqliteCompiler());
         }
 
 

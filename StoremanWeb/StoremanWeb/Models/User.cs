@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoremanWeb.Models
 {
-    public class UserModel
+    public class User
     {
         public int ID;
         public String Name;
@@ -14,7 +14,7 @@ namespace StoremanWeb.Models
         public String Salt;
     }
 
-    public class LoginModel
+    public class Login
     {
         public string username;
         public string password;
