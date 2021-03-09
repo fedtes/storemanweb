@@ -43,7 +43,7 @@ namespace StoremanWeb.Controllers
                 query.WhereLike("Codice", codice);
 
             query.Where("ListID", -1);
-            query.Where("HistoryStatus", 0);
+            query.Where("HistoryStatus", 1);
 
             query.ForPage(page, 15);
 
@@ -57,11 +57,14 @@ namespace StoremanWeb.Controllers
         public async Task<ActionResult> GetArticle(int id)
         {
             var query = dbservice.DBContext.Query().From("Articles");
-            query.WhereLike("ID", id);
+            query.Where("ID", id);
             query.Where("ListID", -1);
-            query.Where("HistoryStatus", 0);
+            query.Where("HistoryStatus", 1);
             var a = await query.GetAsync<Article>();
-            return new JsonResult(a.First());
+            if (a.Any())
+                return new JsonResult(a.First());
+            else
+                return new StatusCodeResult(404);
         }
 
         [HttpPost]
