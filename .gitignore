@@ -3,6 +3,7 @@
 
 notgit.txt
 storemandb.db
+wwwroot/
 
 # User-specific files
 *.suo
@@ -27,6 +28,7 @@ bld/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+.vscode/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -197,6 +199,9 @@ ClientBin/
 *.publishsettings
 node_modules/
 orleans.codegen.cs
+dist/
+.cache
+
 
 # Since there are multiple workflows, uncomment next line to ignore bower_components
 # (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
