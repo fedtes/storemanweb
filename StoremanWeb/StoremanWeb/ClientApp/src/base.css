@@ -1,0 +1,35 @@
+﻿table {
+    font-size: 0.8em;
+}
+
+.login-page input {
+    width:100%;
+}
+
+.login-btn {
+    text-align: end;
+    padding-top: 0.5rem;
+}
+
+.list-toolbar {
+    text-align:end;
+}
+
+.list-toolbar .btn {
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 2px 5px 3px 5px;
+    width: 80px;
+}
+
+.list-filter input {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.list-table div {
+    max-height: 75vh;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}

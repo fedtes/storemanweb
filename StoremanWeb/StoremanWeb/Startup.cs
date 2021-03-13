@@ -47,6 +47,7 @@ namespace StoremanWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UsePathBase(new PathString("/storeman"));
             }
 
             app.UseStaticFiles();

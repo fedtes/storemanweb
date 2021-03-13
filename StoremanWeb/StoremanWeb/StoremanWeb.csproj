@@ -3,7 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\api\APIProvider.tsx" />
+    <None Remove="ClientApp\src\api\index.tsx" />
+    <None Remove="ClientApp\src\api\models\index.ts" />
+    <None Remove="ClientApp\src\pages\article_detail\index.tsx" />
+    <None Remove="ClientApp\src\pages\article_grid\index.tsx" />
+    <None Remove="ClientApp\src\pages\login\index.tsx" />
+    <None Remove="ClientApp\src\route\PrivateRoute.tsx" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -16,6 +27,13 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <TypeScriptCompile Include="ClientApp\src\api\APIProvider.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\api\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\api\models\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\pages\article_detail\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\article_grid\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\login\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\route\PrivateRoute.tsx" />
     <Content Update="ClientApp\**\*.*" CopyToPublishDirectory="Never" />
   </ItemGroup>
 

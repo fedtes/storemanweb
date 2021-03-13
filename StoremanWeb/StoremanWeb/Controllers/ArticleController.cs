@@ -45,7 +45,7 @@ namespace StoremanWeb.Controllers
             query.Where("ListID", -1);
             query.Where("HistoryStatus", 1);
 
-            query.ForPage(page, 15);
+            query.ForPage(page, 25);
 
             var a = await query.GetAsync<Article>();
 
