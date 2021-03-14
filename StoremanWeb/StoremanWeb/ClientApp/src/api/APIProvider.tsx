@@ -1,5 +1,5 @@
 ﻿import * as $ from 'jquery';
-import { Article } from './models/index';
+import { Article, ArticleList } from './models/index';
 
 
 interface IClaim {
@@ -24,6 +24,7 @@ export class APIProvider {
     private refresh_url: string = "/user/refreshtoken";
 
     private article_url: string = "/article"
+    private article_list_url: string = "/articlelist"
     
     public constructor() {
         this.origin = window.location.origin;
@@ -41,6 +42,33 @@ export class APIProvider {
         });
     }
 
+
+    public async getArticle(id: number) {
+        return await this.get<Article>(this.url(this.article_url) + "/" + id);
+    }
+
+    public async updateArticle(article: Article) {
+        return await this.put(this.url(this.article_url), article);
+    }
+
+    public async deleteArticle(id: number) {
+        return await this.delete(this.url(this.article_url) + "/" + id, {});
+    }
+
+    public async createArticle(article: Article) {
+        return await this.post<Article>(this.url(this.article_url), article);
+    }
+
+
+    public async getArticleLists(page: number, filter: any, ) {
+        return await this.get<ArticleList[]>(this.url(this.article_list_url), {
+            page: page,
+            nome: filter.nome ? "%" + filter.nome + "%" : null,
+            stato: filter.stato ? "%" + filter.stato + "%" : null,
+            dateFrom: filter.dateFrom ? filter.dateFrom.toJSON() : null,
+            dateTo: filter.dateTo ? filter.dateTo.toJSON() : null,
+        });
+    }
 
 
     /* ------------------ LOGIN MANAGEMENT --------------- */

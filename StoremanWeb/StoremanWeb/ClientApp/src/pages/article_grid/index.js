@@ -7,10 +7,16 @@ export function ArticleGrid() {
     const history = useHistory();
     const api = useAPI();
     const rowClicked = (ID) => {
-        history.push(appPath("/articlelist/" + ID));
+        history.push(appPath("/article/" + ID));
     };
     const search = () => {
         setState(Object.assign({}, state, { fetchStatus: 0 }));
+    };
+    const recordNew = () => {
+        history.push(appPath("/article/-1"));
+    };
+    const changePage = (page) => {
+        setState(Object.assign({}, state, { page: page, fetchStatus: 0 }));
     };
     if (0 === state.fetchStatus) {
         api.getArticles(state.page, state.filter)
@@ -21,19 +27,19 @@ export function ArticleGrid() {
         return (React.createElement("div", { className: "container mx-0 mx-xl-auto", style: { maxWidth: "unset" } },
             React.createElement("div", { className: "row list-filter" },
                 React.createElement("div", { className: "col-md-4 col-12" },
-                    React.createElement("input", { type: "text", placeholder: "codice", value: state.filter.codice, onInput: e => setState(Object.assign({}, state, { filter: Object.assign({}, state.filter, { codice: e.currentTarget.value }) })) })),
+                    React.createElement("input", { type: "text", placeholder: "codice", className: "form-control", value: state.filter.codice, onInput: e => setState(Object.assign({}, state, { filter: Object.assign({}, state.filter, { codice: e.currentTarget.value }) })) })),
                 React.createElement("div", { className: "col-md-4 col-12" },
-                    React.createElement("input", { type: "text", placeholder: "descrizione", value: state.filter.descrizione, onInput: e => setState(Object.assign({}, state, { filter: Object.assign({}, state.filter, { descrizione: e.currentTarget.value }) })) })),
+                    React.createElement("input", { type: "text", placeholder: "descrizione", className: "form-control", value: state.filter.descrizione, onInput: e => setState(Object.assign({}, state, { filter: Object.assign({}, state.filter, { descrizione: e.currentTarget.value }) })) })),
                 React.createElement("div", { className: "col-md-4 col-12" },
-                    React.createElement("input", { type: "text", placeholder: "costruttore", value: state.filter.costruttore, onInput: e => setState(Object.assign({}, state, { filter: Object.assign({}, state.filter, { costruttore: e.currentTarget.value }) })) }))),
+                    React.createElement("input", { type: "text", placeholder: "costruttore", className: "form-control", value: state.filter.costruttore, onInput: e => setState(Object.assign({}, state, { filter: Object.assign({}, state.filter, { costruttore: e.currentTarget.value }) })) }))),
             React.createElement("div", { className: "row" },
                 React.createElement("div", { className: "col list-toolbar" },
                     React.createElement("button", { className: "btn btn-primary", onClick: search }, "Cerca"),
-                    React.createElement("button", { className: "btn btn-success" }, "Nuovo"))),
+                    React.createElement("button", { className: "btn btn-success", onClick: recordNew }, "Nuovo"))),
             React.createElement("div", { className: "row" },
                 React.createElement("div", { className: "col list-table" },
                     React.createElement("div", { className: "table-responsive-sm" },
-                        React.createElement("table", { className: "table table-sm table-striped" },
+                        React.createElement("table", { className: "table table-striped" },
                             React.createElement("colgroup", null,
                                 React.createElement("col", { style: { width: "5%" } }),
                                 React.createElement("col", { style: { width: "5%" } }),
@@ -51,7 +57,18 @@ export function ArticleGrid() {
                                     React.createElement("th", { scope: "col" }, "Scorta"),
                                     React.createElement("th", { scope: "col" }, "Ricavo"),
                                     React.createElement("th", { scope: "col" }, "Prz.Unitario"))),
-                            React.createElement("tbody", null, state.items.map(i => React.createElement(TableRow, { key: i.id, codice: i.codice, costruttore: i.costruttore, descrizione: i.descrizione, prezzoAcquisto: i.prezzoAcquisto, scorta: i.scorta, ricavo: i.ricavo, prezzoUnitario: i.prezzoUnitario, id: i.id, rowClicked: rowClicked })))))))));
+                            React.createElement("tbody", null, state.items.map(i => React.createElement(TableRow, { key: i.id, codice: i.codice, costruttore: i.costruttore, descrizione: i.descrizione, prezzoAcquisto: i.prezzoAcquisto, scorta: i.scorta, ricavo: i.ricavo, prezzoUnitario: i.prezzoUnitario, id: i.id, rowClicked: rowClicked }))))))),
+            React.createElement("div", { className: "row" },
+                React.createElement("div", { className: "col" },
+                    React.createElement("ul", { className: "pagination justify-content-end" },
+                        React.createElement("li", { onClick: () => changePage(1), className: state.page === 1 ? "page-item active" : "page-item" },
+                            React.createElement("span", { className: "page-link" }, "1")),
+                        React.createElement("li", { onClick: () => changePage(2), className: state.page === 2 ? "page-item active" : "page-item" },
+                            React.createElement("span", { className: "page-link" }, "2")),
+                        React.createElement("li", { onClick: () => changePage(3), className: state.page === 3 ? "page-item active" : "page-item" },
+                            React.createElement("span", { className: "page-link" }, "3")),
+                        React.createElement("li", { className: "page-item disabled" },
+                            React.createElement("span", { className: "page-link" }, "...")))))));
     }
 }
 function TableRow(props) {

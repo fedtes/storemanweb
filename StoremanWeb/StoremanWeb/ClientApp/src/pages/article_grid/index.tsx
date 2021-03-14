@@ -23,12 +23,16 @@ export function ArticleGrid() {
     const api = useAPI();
 
     const rowClicked = (ID: number) => {
-        history.push(appPath("/articlelist/" + ID));
+        history.push(appPath("/article/" + ID));
     };
 
     const search = () => {
         setState({ ...state, fetchStatus: 0 });
     }
+
+    const recordNew = () => {
+        history.push(appPath("/article/-1"));
+    };
 
     const changePage = (page: number) => {
         setState({ ...state, page: page, fetchStatus: 0 });
@@ -47,16 +51,19 @@ export function ArticleGrid() {
                 <div className="row list-filter">
                     <div className="col-md-4 col-12">
                         <input type="text" placeholder="codice"
+                            className="form-control"
                             value={state.filter.codice}
                             onInput={e => setState({ ...state, filter: {...state.filter, codice: e.currentTarget.value } })}></input>
                     </div>
                     <div className="col-md-4 col-12">
                         <input type="text" placeholder="descrizione"
+                            className="form-control"
                             value={state.filter.descrizione}
                             onInput={e => setState({ ...state, filter: { ...state.filter, descrizione: e.currentTarget.value } })}></input>
                     </div>
                     <div className="col-md-4 col-12">
                         <input type="text" placeholder="costruttore"
+                            className="form-control"
                             value={state.filter.costruttore}
                             onInput={e => setState({ ...state, filter: { ...state.filter, costruttore: e.currentTarget.value } })}></input>
                     </div>
@@ -64,7 +71,7 @@ export function ArticleGrid() {
                 <div className="row">
                     <div className="col list-toolbar">
                         <button className="btn btn-primary" onClick={search}>Cerca</button>
-                        <button className="btn btn-success">Nuovo</button>
+                        <button className="btn btn-success" onClick={recordNew}>Nuovo</button>
                     </div>
                 </div>
                 <div className="row">

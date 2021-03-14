@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using SqlKata.Execution;
 using StoremanWeb.Models;
 using StoremanWeb.Services;
+using StoremanWeb.Helpers;
 
 namespace StoremanWeb.Controllers
 {
@@ -25,12 +26,21 @@ namespace StoremanWeb.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetArticleLists(string descrizione, int page=1)
+        public async Task<ActionResult> GetArticleLists(string nome, string stato, DateTime? dateFrom, DateTime? dateTo, int page=1)
         {
             var query = dbservice.DBContext.Query().From("ArticleList");
 
-            if (!String.IsNullOrEmpty(descrizione))
-                query.WhereLike("Descrizione", descrizione);
+            if (!String.IsNullOrEmpty(nome))
+                query.WhereLike("Nome", nome);
+
+            if (!String.IsNullOrEmpty(stato))
+                query.Where("Stato", stato);
+
+            if (dateFrom != null)
+                query.Where("CDate", ">=", ((DateTime)dateFrom).ToDbString());
+
+            if (dateTo != null)
+                query.Where("CDate", "<=", ((DateTime)dateTo).ToDbString());
 
             query.Where("HistoryStatus", 1);
 
@@ -62,7 +72,8 @@ namespace StoremanWeb.Controllers
                 .Query("ArticleList")
                 .InsertGetIdAsync<int>(new
                 {
-                    Descrizione = articleList.Descrizione,
+                    Nome = articleList.Nome,
+                    CDate = articleList.CDate,
                     HistoryStatus = articleList.HistoryStatus,
                     Stato = "Da Scaricare"
                 });
@@ -83,13 +94,13 @@ namespace StoremanWeb.Controllers
                 .Where("ID", articleList.ID)
                 .UpdateAsync(new
                 {
-                    Descrizione = articleList.Descrizione,
+                    Nome = articleList.Nome,
                     HistoryStatus = articleList.HistoryStatus,
                     Stato = articleList.Stato
                 });
 
 
-            return new StatusCodeResult(200);
+            return new JsonResult(new { message = "OK" });
         }
 
         [HttpDelete]
@@ -106,7 +117,7 @@ namespace StoremanWeb.Controllers
                     HistoryStatus = 2
                 });
 
-            return new StatusCodeResult(200);
+            return new JsonResult(new { message = "OK" });
         }
 
         [HttpGet]
@@ -153,20 +164,20 @@ namespace StoremanWeb.Controllers
 
             var article = articles.First();
 
-            var newid = await dbservice.DBContext.Query()
+            var newid = await dbservice.DBContext.Query("Articles")
                 .InsertGetIdAsync<int>(new {
-                    HistoryStatus = article.HistoryStatus,
+                    HistoryStatus = 1,
                     ListID = id,
                     Costruttore = article.Costruttore,
                     Codice = article.Codice,
-                    Decrizione = article.Descrizione,
+                    Descrizione = article.Descrizione,
                     PrezzoAcquisto = article.PrezzoAcquisto,
                     Scorta = article.Scorta,
                     Ricavo = article.Ricavo,
-                    PrezzoUnitario = article.PrezzoAcquisto * (article.Ricavo / 100),
+                    PrezzoUnitario = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100),
                     UnitaMisura = article.UnitaMisura,
                     Quantita = 1,
-                    Totale = article.PrezzoAcquisto * (article.Ricavo / 100) * 1
+                    Totale = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100) * 1
                 });
 
             return await this.GetArticle(id, newid);
@@ -196,14 +207,14 @@ namespace StoremanWeb.Controllers
                     ListID = id,
                     Costruttore = article.Costruttore,
                     Codice = article.Codice,
-                    Decrizione = article.Descrizione,
+                    Descrizione = article.Descrizione,
                     PrezzoAcquisto = article.PrezzoAcquisto,
                     Scorta = article.Scorta,
                     Ricavo = article.Ricavo,
-                    PrezzoUnitario = article.PrezzoAcquisto * (article.Ricavo / 100),
+                    PrezzoUnitario = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100),
                     UnitaMisura = article.UnitaMisura,
                     Quantita = article.Quantita,
-                    Totale = article.PrezzoAcquisto * (article.Ricavo / 100) * article.Quantita
+                    Totale = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100) * article.Quantita
                 });
 
             return await this.GetArticle(id, article.ID);
@@ -218,7 +229,7 @@ namespace StoremanWeb.Controllers
                 .Where("ListID", id)
                 .DeleteAsync();
 
-            return new StatusCodeResult(200);
+            return new JsonResult(new { message = "OK" });
         }
 
     }

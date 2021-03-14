@@ -7,6 +7,7 @@ import PrivateRoute from "./route/PrivateRoute";
 import { Login } from "./pages/login/index";
 import { ArticleDetail } from "./pages/article_detail/index";
 import { ArticleGrid } from "./pages/article_grid/index";
+import { ArticleListGrid } from "./pages/articlelist_grid/index";
 
 const history = createBrowserHistory();
 
@@ -23,7 +24,7 @@ const App = () => {
                     </PrivateRoute>
                     <PrivateRoute path={appPath("/articlelist")}>
                         <Navbar></Navbar>
-                        <div>article lists</div>
+                        <ArticleListGrid></ArticleListGrid>
                     </PrivateRoute>
                     <PrivateRoute path={appPath("/article/:id")}>
                         <Navbar></Navbar>

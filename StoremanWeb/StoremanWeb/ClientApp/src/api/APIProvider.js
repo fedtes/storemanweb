@@ -16,6 +16,7 @@ export class APIProvider {
         this.ping_url = "/user/ping";
         this.refresh_url = "/user/refreshtoken";
         this.article_url = "/article";
+        this.article_list_url = "/articlelist";
         /* ------------------ LOGIN MANAGEMENT --------------- */
         this.claim = {
             loggeduser: "",
@@ -34,6 +35,37 @@ export class APIProvider {
                 costruttore: filter.costruttore ? "%" + filter.costruttore + "%" : null,
                 descrizione: filter.descrizione ? "%" + filter.descrizione + "%" : null,
                 codice: filter.codice ? "%" + filter.codice + "%" : null
+            });
+        });
+    }
+    getArticle(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.get(this.url(this.article_url) + "/" + id);
+        });
+    }
+    updateArticle(article) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.put(this.url(this.article_url), article);
+        });
+    }
+    deleteArticle(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.delete(this.url(this.article_url) + "/" + id, {});
+        });
+    }
+    createArticle(article) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.post(this.url(this.article_url), article);
+        });
+    }
+    getArticleLists(page, filter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.get(this.url(this.article_list_url), {
+                page: page,
+                nome: filter.nome ? "%" + filter.nome + "%" : null,
+                stato: filter.stato ? "%" + filter.stato + "%" : null,
+                dateFrom: filter.dateFrom ? filter.dateFrom.toJSON() : null,
+                dateTo: filter.dateTo ? filter.dateTo.toJSON() : null,
             });
         });
     }

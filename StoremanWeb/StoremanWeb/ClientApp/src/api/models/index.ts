@@ -13,3 +13,11 @@
     quantita: number,
     totale:number
 }
+
+export interface ArticleList {
+    id: number,
+    historyStatus: number,
+    nome: string,
+    stato: string,
+    creationDate: Date
+}

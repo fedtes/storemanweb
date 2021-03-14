@@ -71,14 +71,14 @@ namespace StoremanWeb.Controllers
         [Route("")]
         public async Task<ActionResult> CreateArticle([FromBody] Article article)
         {
-            var id = await dbservice.DBContext.Query()
+            var id = await dbservice.DBContext.Query("Articles")
                 .InsertGetIdAsync<int>(new
                 {
-                    HistoryStatus = article.HistoryStatus,
+                    HistoryStatus = 1,
                     ListID = -1,
                     Costruttore = article.Costruttore,
                     Codice = article.Codice,
-                    Decrizione = article.Descrizione,
+                    Descrizione = article.Descrizione,
                     PrezzoAcquisto = article.PrezzoAcquisto,
                     Scorta = article.Scorta,
                     Ricavo = article.Ricavo,
@@ -106,17 +106,17 @@ namespace StoremanWeb.Controllers
                     ListID = -1,
                     Costruttore = article.Costruttore,
                     Codice = article.Codice,
-                    Decrizione = article.Descrizione,
+                    Descrizione = article.Descrizione,
                     PrezzoAcquisto = article.PrezzoAcquisto,
                     Scorta = article.Scorta,
                     Ricavo = article.Ricavo,
-                    PrezzoUnitario = article.PrezzoAcquisto * (article.Ricavo / 100),
+                    PrezzoUnitario = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100),
                     UnitaMisura = article.UnitaMisura,
                     Quantita = 0,
                     Totale = 0
                 });
 
-            return new StatusCodeResult(200);
+            return new JsonResult(new { message= "OK" });
         }
 
         [HttpDelete]
@@ -133,7 +133,7 @@ namespace StoremanWeb.Controllers
                     HistoryStatus = 2
                 });
 
-            return new StatusCodeResult(200);
+            return new JsonResult(new { message = "OK" });
         }
     }
 }

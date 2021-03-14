@@ -7,6 +7,7 @@ import PrivateRoute from "./route/PrivateRoute";
 import { Login } from "./pages/login/index";
 import { ArticleDetail } from "./pages/article_detail/index";
 import { ArticleGrid } from "./pages/article_grid/index";
+import { ArticleListGrid } from "./pages/articlelist_grid/index";
 const history = createBrowserHistory();
 const App = () => {
     return (React.createElement(API, null,
@@ -17,7 +18,7 @@ const App = () => {
                 React.createElement(PrivateRoute, { path: appPath("/articlelist/:id") }),
                 React.createElement(PrivateRoute, { path: appPath("/articlelist") },
                     React.createElement(Navbar, null),
-                    React.createElement("div", null, "article lists")),
+                    React.createElement(ArticleListGrid, null)),
                 React.createElement(PrivateRoute, { path: appPath("/article/:id") },
                     React.createElement(Navbar, null),
                     React.createElement(ArticleDetail, null)),
