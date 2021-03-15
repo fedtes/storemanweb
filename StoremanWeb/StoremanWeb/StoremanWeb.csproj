@@ -10,7 +10,10 @@
     <None Remove="ClientApp\src\api\APIProvider.tsx" />
     <None Remove="ClientApp\src\api\index.tsx" />
     <None Remove="ClientApp\src\api\models\index.ts" />
+    <None Remove="ClientApp\src\helpers.tsx" />
+    <None Remove="ClientApp\src\pages\articlelist_detail\index.tsx" />
     <None Remove="ClientApp\src\pages\articlelist_grid\index.tsx" />
+    <None Remove="ClientApp\src\pages\article_detail\header.tsx" />
     <None Remove="ClientApp\src\pages\article_detail\index.tsx" />
     <None Remove="ClientApp\src\pages\article_grid\index.tsx" />
     <None Remove="ClientApp\src\pages\login\index.tsx" />
@@ -31,7 +34,10 @@
     <TypeScriptCompile Include="ClientApp\src\api\APIProvider.tsx" />
     <TypeScriptCompile Include="ClientApp\src\api\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\api\models\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\helpers.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_grid\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\header.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\article_detail\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\article_grid\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\login\index.tsx" />

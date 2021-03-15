@@ -31,7 +31,10 @@ export class APIProvider {
         this.app_name = "storeman";
     }
 
-    /* ----------------- DATA ---------------------------- */
+    /* --------------------------------------- DATA ---------------------------------------------- */
+
+
+    /* --------------------------------------- Article ---------------------------------------------- */
 
     public async getArticles(page: number, filter: any) {
         return await this.get<Article[]>(this.url(this.article_url), {
@@ -59,6 +62,8 @@ export class APIProvider {
         return await this.post<Article>(this.url(this.article_url), article);
     }
 
+    /* --------------------------------------- ArticleList ---------------------------------------------- */
+
 
     public async getArticleLists(page: number, filter: any, ) {
         return await this.get<ArticleList[]>(this.url(this.article_list_url), {
@@ -68,6 +73,11 @@ export class APIProvider {
             dateFrom: filter.dateFrom ? filter.dateFrom.toJSON() : null,
             dateTo: filter.dateTo ? filter.dateTo.toJSON() : null,
         });
+    }
+
+
+    public async getArticleList(id: number) {
+        return await this.get<ArticleList>(this.url(this.article_list_url) + "/" + id);
     }
 
 
