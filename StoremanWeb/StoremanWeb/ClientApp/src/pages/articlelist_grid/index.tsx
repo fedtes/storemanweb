@@ -4,6 +4,7 @@ import { useAPI, appPath } from "../../api/index";
 import { useHistory } from "react-router";
 import { Article, ArticleList } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
+import { toDateInputValue, fromDateInputValue } from "../../helpers";
 
 
 interface IState {
@@ -16,18 +17,6 @@ interface IState {
         dateFrom?: Date,
         dateTo?: Date
     }
-}
-
-function toDateInputValue(date: Date) {
-    if (!date) return null;
-    var day = ("0" + date.getDate()).slice(-2);
-    var month = ("0" + (date.getMonth() + 1)).slice(-2);
-    return date.getFullYear() + "-" + (month) + "-" + (day);
-}
-
-function fromDateInputValue(date: string) {
-    var x = date.split("-");
-    return new Date(parseInt(x[0]), parseInt(x[1]), parseInt(x[2]));
 }
 
 export function ArticleListGrid() {
