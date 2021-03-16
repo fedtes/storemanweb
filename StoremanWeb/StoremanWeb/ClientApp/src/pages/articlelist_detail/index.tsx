@@ -6,6 +6,8 @@ import { Article, ArticleList } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
 import { toDateInputValue, fromDateInputValue } from "../../helpers";
 import { ArticleListHeader } from "./header";
+import { LeftList } from "./leftlist";
+import { RightList } from "./rightlist";
 
 
 
@@ -32,6 +34,11 @@ export function ArticleListDetail() {
     const recordSave = () => { };
     const recordDelete = () => { };
 
+    /* ------------- Sync beteew left-right ------------------- */ 
+    const onLeftItemAddClick = (id: number) => { };
+
+
+
     if (state.fetching) {
         api.getArticleList(id)
             .then(a => setState({ ...state, fetching: false, articleList: a }));
@@ -57,8 +64,12 @@ export function ArticleListDetail() {
                 </div>
 
                 <div className="row">
-                    <div className="col-md-4 col-12"></div>
-                    <div className="col-md-8 col-12"></div>
+                    <div className="col-md-4 col-12">
+                        <LeftList itemClicked={onLeftItemAddClick}></LeftList>
+                    </div>
+                    <div className="col-md-8 col-12">
+                        <RightList></RightList>
+                    </div>
                 </div>
                 
 

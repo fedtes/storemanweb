@@ -11,7 +11,10 @@
     <None Remove="ClientApp\src\api\index.tsx" />
     <None Remove="ClientApp\src\api\models\index.ts" />
     <None Remove="ClientApp\src\helpers.tsx" />
+    <None Remove="ClientApp\src\pages\articlelist_detail\article_card.tsx" />
     <None Remove="ClientApp\src\pages\articlelist_detail\index.tsx" />
+    <None Remove="ClientApp\src\pages\articlelist_detail\leftlist.tsx" />
+    <None Remove="ClientApp\src\pages\articlelist_detail\rightlist.tsx" />
     <None Remove="ClientApp\src\pages\articlelist_grid\index.tsx" />
     <None Remove="ClientApp\src\pages\article_detail\header.tsx" />
     <None Remove="ClientApp\src\pages\article_detail\index.tsx" />
@@ -35,7 +38,10 @@
     <TypeScriptCompile Include="ClientApp\src\api\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\api\models\index.ts" />
     <TypeScriptCompile Include="ClientApp\src\helpers.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\article_card.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\leftlist.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\rightlist.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_grid\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\header.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\article_detail\index.tsx" />
