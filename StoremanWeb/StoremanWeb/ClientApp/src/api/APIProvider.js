@@ -27,7 +27,8 @@ export class APIProvider {
         this.origin = window.location.origin;
         this.app_name = "storeman";
     }
-    /* ----------------- DATA ---------------------------- */
+    /* --------------------------------------- DATA ---------------------------------------------- */
+    /* --------------------------------------- Article ---------------------------------------------- */
     getArticles(page, filter) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.get(this.url(this.article_url), {
@@ -58,6 +59,7 @@ export class APIProvider {
             return yield this.post(this.url(this.article_url), article);
         });
     }
+    /* --------------------------------------- ArticleList ---------------------------------------------- */
     getArticleLists(page, filter) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.get(this.url(this.article_list_url), {
@@ -67,6 +69,21 @@ export class APIProvider {
                 dateFrom: filter.dateFrom ? filter.dateFrom.toJSON() : null,
                 dateTo: filter.dateTo ? filter.dateTo.toJSON() : null,
             });
+        });
+    }
+    getArticleList(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.get(this.url(this.article_list_url) + "/" + id);
+        });
+    }
+    addArticle(id, listId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.post(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
+        });
+    }
+    removeArticle(id, listId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.delete(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
         });
     }
     ping() {

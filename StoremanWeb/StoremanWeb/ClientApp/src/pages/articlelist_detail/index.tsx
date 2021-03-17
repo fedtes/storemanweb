@@ -7,7 +7,7 @@ import { Loader } from "../../route/PrivateRoute";
 import { toDateInputValue, fromDateInputValue } from "../../helpers";
 import { ArticleListHeader } from "./header";
 import { LeftList } from "./leftlist";
-import { RightList } from "./rightlist";
+import { RightList, IRef } from "./rightlist";
 
 
 
@@ -30,6 +30,7 @@ export function ArticleListDetail() {
     const { id } = useParams();
     const api = useAPI();
     const [state, setState] = React.useState<IState>({ fetching: true, isDirty: false, isNew: id === "-1", articleList: defaultArticleList });
+    const rightListRef = React.useRef<IRef>();
 
     const recordSave = () => { };
     const recordDelete = () => { };
@@ -68,7 +69,7 @@ export function ArticleListDetail() {
                         <LeftList itemClicked={onLeftItemAddClick}></LeftList>
                     </div>
                     <div className="col-md-8 col-12">
-                        <RightList></RightList>
+                        
                     </div>
                 </div>
                 

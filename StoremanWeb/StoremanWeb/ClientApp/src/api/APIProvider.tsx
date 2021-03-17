@@ -80,6 +80,14 @@ export class APIProvider {
         return await this.get<ArticleList>(this.url(this.article_list_url) + "/" + id);
     }
 
+    public async addArticle(id: number, listId: number) {
+        return await this.post<Article>(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
+    }
+
+    public async removeArticle(id: number, listId: number) {
+        return await this.delete(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
+    }
+
 
     /* ------------------ LOGIN MANAGEMENT --------------- */
 

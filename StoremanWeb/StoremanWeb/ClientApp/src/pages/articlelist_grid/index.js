@@ -2,17 +2,7 @@ import * as React from "react";
 import { useAPI, appPath } from "../../api/index";
 import { useHistory } from "react-router";
 import { Loader } from "../../route/PrivateRoute";
-function toDateInputValue(date) {
-    if (!date)
-        return null;
-    var day = ("0" + date.getDate()).slice(-2);
-    var month = ("0" + (date.getMonth() + 1)).slice(-2);
-    return date.getFullYear() + "-" + (month) + "-" + (day);
-}
-function fromDateInputValue(date) {
-    var x = date.split("-");
-    return new Date(parseInt(x[0]), parseInt(x[1]), parseInt(x[2]));
-}
+import { toDateInputValue, fromDateInputValue } from "../../helpers";
 export function ArticleListGrid() {
     const [state, setState] = React.useState({ fetching: true, page: 1, items: [], filter: {} });
     const history = useHistory();
