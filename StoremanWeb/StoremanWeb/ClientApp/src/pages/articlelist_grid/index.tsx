@@ -9,6 +9,7 @@ import { toDateInputValue, fromDateInputValue } from "../../helpers";
 
 interface IState {
     fetching: boolean,
+    showFormNew: boolean,
     page: number,
     items: ArticleList[]
     filter: {
@@ -20,9 +21,16 @@ interface IState {
 }
 
 export function ArticleListGrid() {
-    const [state, setState] = React.useState<IState>({ fetching: true, page: 1, items: [], filter: {} });
+    const [state, setState] = React.useState<IState>({
+        fetching: true,
+        showFormNew: false,
+        page: 1,
+        items: [],
+        filter: {}
+    });
     const history = useHistory();
     const api = useAPI();
+    const inputRef = React.useRef<any>();
 
     const rowClicked = (ID: number) => {
         history.push(appPath("/articlelist/" + ID));
@@ -32,8 +40,18 @@ export function ArticleListGrid() {
         setState({ ...state, fetching: true });
     }
 
+    const executeRecordNew = (name:string) => {
+        api.createArticleList({
+            creationDate: new Date(),
+            historyStatus: 1,
+            id: -1,
+            nome: name,
+            stato: "Da Scaricare"
+        }).then(a => history.push(appPath("/articlelist/" + a.id)));
+    };
+
     const recordNew = () => {
-        history.push(appPath("/articlelist/-1"));
+        setState({ ...state, showFormNew: true });
     };
 
     const changePage = (page: number) => {
@@ -45,6 +63,30 @@ export function ArticleListGrid() {
             .then(i => setState({ ...state, fetching: false, items: i }));
         return (
             <Loader></Loader>
+        );
+    } 
+    else if (state.showFormNew) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="container py-2">
+                        <div className="row justify-content-center">
+                            <div className="col-6">
+                                <input type="text"
+                                    ref={inputRef}
+                                    placeholder="nome"
+                                    className="form-control">
+                                </input>
+                            </div>
+                            <div className="col-2">
+                                <button
+                                    onClick={() => executeRecordNew(inputRef.current.value)}
+                                    className="btn btn-primary">Crea</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
     else {
@@ -97,8 +139,8 @@ export function ArticleListGrid() {
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>
+                                        <th scope="col">Stato</th>
                                         <th scope="col">Data Creazione</th>
-                                        <th scope="col">Stao</th>
                                     </tr>
                                 </thead>
                                 <tbody>

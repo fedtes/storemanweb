@@ -75,17 +75,25 @@ export class APIProvider {
         });
     }
 
+    public async createArticleList(articleList: ArticleList) {
+        return await this.post<ArticleList>(this.url(this.article_list_url), articleList);
+    }
+
 
     public async getArticleList(id: number) {
         return await this.get<ArticleList>(this.url(this.article_list_url) + "/" + id);
     }
 
-    public async addArticle(id: number, listId: number) {
+    public async addArticleItem(id: number, listId: number) {
         return await this.post<Article>(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
     }
 
-    public async removeArticle(id: number, listId: number) {
+    public async removeArticleItem(id: number, listId: number) {
         return await this.delete(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
+    }
+
+    public async updateArticleItem(item: Article, listId: number) {
+        return await this.put(this.url(this.article_list_url) + "/" + listId + "/item", item);
     }
 
 

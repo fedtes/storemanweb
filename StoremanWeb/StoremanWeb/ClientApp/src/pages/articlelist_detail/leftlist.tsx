@@ -44,7 +44,7 @@ export function LeftList(props:any) {
 
     if (state.fetching) {
         api.getArticles(state.page, state.filter)
-            .then(i => setState({ ...state, items: i }));
+            .then(i => setState({ ...state, items: i, fetching:false }));
         return <Loader></Loader>
     } else {
         return (

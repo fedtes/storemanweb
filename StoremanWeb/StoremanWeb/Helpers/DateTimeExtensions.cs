@@ -11,7 +11,7 @@ namespace StoremanWeb.Helpers
             a = a.Substring(a.Length - 2);
 
             var b = ("00" + date.Day.ToString());
-            b = a.Substring(b.Length - 2);
+            b = b.Substring(b.Length - 2);
 
             return $"{date.Year}-{a}-{b}";
         }

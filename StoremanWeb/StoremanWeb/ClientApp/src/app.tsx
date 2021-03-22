@@ -8,6 +8,7 @@ import { Login } from "./pages/login/index";
 import { ArticleDetail } from "./pages/article_detail/index";
 import { ArticleGrid } from "./pages/article_grid/index";
 import { ArticleListGrid } from "./pages/articlelist_grid/index";
+import { ArticleListDetail } from "./pages/articlelist_detail/index";
 
 const history = createBrowserHistory();
 
@@ -20,7 +21,8 @@ const App = () => {
                         <Login></Login>
                     </Route>
                     <PrivateRoute path={appPath("/articlelist/:id")}>
-                        
+                        <Navbar></Navbar>
+                        <ArticleListDetail></ArticleListDetail>           
                     </PrivateRoute>
                     <PrivateRoute path={appPath("/articlelist")}>
                         <Navbar></Navbar>

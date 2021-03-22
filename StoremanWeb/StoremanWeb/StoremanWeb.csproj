@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,7 @@
     <None Remove="ClientApp\src\pages\articlelist_detail\index.tsx" />
     <None Remove="ClientApp\src\pages\articlelist_detail\leftlist.tsx" />
     <None Remove="ClientApp\src\pages\articlelist_detail\rightlist.tsx" />
+    <None Remove="ClientApp\src\pages\articlelist_detail\rightlist_card.tsx" />
     <None Remove="ClientApp\src\pages\articlelist_grid\index.tsx" />
     <None Remove="ClientApp\src\pages\article_detail\header.tsx" />
     <None Remove="ClientApp\src\pages\article_detail\index.tsx" />
@@ -42,6 +44,7 @@
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\leftlist.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\rightlist.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\rightlist_card.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_grid\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\header.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\article_detail\index.tsx" />

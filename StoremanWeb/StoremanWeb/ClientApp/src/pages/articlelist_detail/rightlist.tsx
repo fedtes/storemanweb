@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
 import { Article } from "../../api/models/index";
-import { func } from "prop-types";
 import { useAPI } from "../../api/index";
+import { RightCard } from "./rightlist_card";
 
 type ArticleItem = Article & {isDirty: boolean}
 
@@ -26,21 +26,34 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
     const pushItem = (items: ArticleItem[], item: Article) => items.concat([{ ...item, isDirty: false }]);
 
     const addItem = (id: number) => {
-        api.addArticle(id, props.listId)
+        api.addArticleItem(id, props.listId)
             .then(a => setState({ ...state, items: pushItem(state.items, a) }));
     };
 
     const removeItem = (id: number) => {
-        api.removeArticle(id, props.listId)
+        api.removeArticleItem(id, props.listId)
             .then(() => setState({ ...state, items: state.items.filter(i => i.id !== id) }));
     };
 
-    const saveItem = (id: number) => { };
+    const saveItem = (id: number) => {
+        let item = state.items.find(v => v.id === id); 
+        api.updateArticleItem(item, props.listId)
+            .then(() => {
+                item.isDirty = false;
+                setState({ ...state });
+            })
+    };
 
-    const fieldChange = (id: number) => { };
+    const fieldChange = (id: number, field: string, value: any) => {
+        let item = state.items.find(v => v.id === id);
+        item[field] = value;
+        item.isDirty = true;
+        setState({ ...state });
+    };
 
     const mapItems = () => {
-        return state.items.map(i => { return { ...i, removeItem: removeItem, saveItem: saveItem, fieldChange: fieldChange  } })
+        return state.items
+            .map(i => { return { ...i, removeItem: removeItem, saveItem: saveItem, fieldChange: fieldChange } })
             .map(i => <RightCard {...i}></RightCard>);
     }
 
@@ -56,86 +69,3 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
 
 }
 
-type ICardProps = Article & {
-    isDirty: boolean
-    removeItem: (id: number) => void,
-    saveItem: (id: number) => void,
-    fieldChange: (id:number, field:string, value:any) => void
-}
-
-function RightCard(props: ICardProps) {
-    return (
-        <div className="col-12">
-            <div className="container">
-                <div className="row">
-                    <div className="col-2">
-                        <button className="btn btn-danger" onClick={() => props.removeItem(props.id)}>Remove</button>
-                    </div>
-                    <div className="col-8">
-                        <div className="col-3">
-                            {props.codice}
-                        </div>
-                        <div className="col-9">
-                            {props.descrizione}
-                        </div>
-                        <div className="col-3">
-                            <div className="input-group">
-                                <input type="number"
-                                    value={props.ricavo}
-                                    step="1"
-                                    min="0"
-                                    onChange={e => props.fieldChange(props.id, "ricavo", e.currentTarget.value)}>
-                                </input>
-                                <div className="input-group-append">
-                                    <div className="input-group-text">%</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-3">
-                            <div className="input-group">
-                                <input type="number"
-                                    value={props.prezzoUnitario}
-                                    step="0.01"
-                                    min="0"
-                                    onChange={e => props.fieldChange(props.id, "prezzoUnitario", e.currentTarget.value)}>
-                                </input>
-                                <div className="input-group-append">
-                                    <div className="input-group-text">€</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-3">
-                            <div className="input-group">
-                                <input type="number"
-                                    value={props.quantita}
-                                    step="0.01"
-                                    min="0"
-                                    onChange={e => props.fieldChange(props.id, "quantita", e.currentTarget.value)}>
-                                </input>
-                                <div className="input-group-append">
-                                    <div className="input-group-text">{props.unitaMisura}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-3">
-                            <div className="input-group">
-                                <input type="number"
-                                    value={props.totale}
-                                    step="0.01"
-                                    min="0"
-                                    onChange={e => props.fieldChange(props.id, "totale", e.currentTarget.value)}>
-                                </input>
-                                <div className="input-group-append">
-                                    <div className="input-group-text">€</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-2">
-                        <button disabled={!props.isDirty} className="btn btn-primary" onClick={() => props.removeItem(props.id)}>Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}

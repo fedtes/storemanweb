@@ -46,9 +46,16 @@ namespace StoremanWeb.Controllers
 
             query.ForPage(page, 15);
 
-            var a = await query.GetAsync<ArticleList>();
+            try
+            {
+                var a = await query.GetAsync<ArticleList>();
+                return new JsonResult(a);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
-            return new JsonResult(a);
         }
 
         [HttpGet]

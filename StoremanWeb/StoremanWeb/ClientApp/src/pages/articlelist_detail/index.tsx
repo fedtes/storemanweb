@@ -1,10 +1,9 @@
 ﻿import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { useAPI, appPath } from "../../api/index";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Article, ArticleList } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
-import { toDateInputValue, fromDateInputValue } from "../../helpers";
 import { ArticleListHeader } from "./header";
 import { LeftList } from "./leftlist";
 import { RightList, IRef } from "./rightlist";
@@ -29,15 +28,22 @@ const defaultArticleList: ArticleList = {
 export function ArticleListDetail() {
     const { id } = useParams();
     const api = useAPI();
-    const [state, setState] = React.useState<IState>({ fetching: true, isDirty: false, isNew: id === "-1", articleList: defaultArticleList });
+    const [state, setState] = React.useState<IState>({
+        fetching: true,
+        isDirty: false,
+        isNew: id === "-1",
+        articleList: defaultArticleList
+    });
+
     const rightListRef = React.useRef<IRef>();
 
     const recordSave = () => { };
     const recordDelete = () => { };
 
     /* ------------- Sync beteew left-right ------------------- */ 
-    const onLeftItemAddClick = (id: number) => { };
-
+    const onLeftItemAddClick = (id: number) => {
+        rightListRef.current.addItem(id);
+    };
 
 
     if (state.fetching) {
@@ -50,7 +56,10 @@ export function ArticleListDetail() {
             <div className="container">
                 
                 <div className="row">
-                    <ArticleListHeader articleList={state.articleList} saveClick={recordSave} deleteClick={recordDelete} ></ArticleListHeader>
+                    <ArticleListHeader
+                        articleList={state.articleList}
+                        saveClick={recordSave}
+                        deleteClick={recordDelete} ></ArticleListHeader>
                 </div>
 
                 <div className="row d-md-none">
@@ -69,10 +78,9 @@ export function ArticleListDetail() {
                         <LeftList itemClicked={onLeftItemAddClick}></LeftList>
                     </div>
                     <div className="col-md-8 col-12">
-                        
+                        <RightList ref={rightListRef} listId={state.articleList.id}></RightList>
                     </div>
                 </div>
-                
 
             </div>
         );
