@@ -51,7 +51,7 @@ export function LeftList(props:any) {
             <div className="containter">
 
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-12 py-2">
                         <input type="text"
                             className="form-control"
                             placeholder="codice"
@@ -59,7 +59,7 @@ export function LeftList(props:any) {
                             onChange={e => setCodeFilter(e.currentTarget.value)}>
                         </input>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 py-2">
                         <input type="text"
                             className="form-control"
                             placeholder="descrizione"
@@ -67,7 +67,7 @@ export function LeftList(props:any) {
                             onChange={e => setDescFilter(e.currentTarget.value)}>
                         </input>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 py-2">
                         <input type="text"
                             className="form-control"
                             placeholder="costruttore"
@@ -78,7 +78,7 @@ export function LeftList(props:any) {
                 </div>
 
                 <div className="row">
-                    <div className="col-12 justify-content-righ">
+                    <div className="col-12" style={{textAlign:"end"}}>
                         <button className="btn btn-success" onClick={refreshGrid}>Aggiorna</button>
                     </div>
                 </div>

@@ -13,68 +13,36 @@ export interface IArticleListHeaderProps {
 export function ArticleListHeader(props: IArticleListHeaderProps) {
 
     return (
-        <nav className="navbar navbar-expand-md navbar-light bg-light w-100">
+        <nav className="navbar navbar-expand-xl navbar-light bg-light w-100">
             <div className="navbar-brand"></div>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#headernav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
             <div className="collapse navbar-collapse" id="headernav">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-2 col-12">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">ID</span>
+                <div className="container px-0">
+                    <div className="row w-100">
+                        <div className="col-xl-10 col-12 px-0">
+                            <div className="container">
+                                <div className="row w-100">
+                                    <div className="col-xl-3 col-12">
+                                        <span>ID: {props.articleList.id}</span>
+                                    </div>
+                                    <div className="col-xl-3 col-12">
+                                        <span>Nome: {props.articleList.nome}</span>
+                                    </div>
+                                    <div className="col-xl-3 col-12">
+                                        <span>Stato: {props.articleList.stato}</span>
+                                    </div>
+                                    <div className="col-xl-3 col-12">
+                                        <span>Data: {toDateInputValue(props.articleList.creationDate)}</span>
+                                    </div>
                                 </div>
-                                <input type="text"
-                                    className="form-control"
-                                    readOnly={true}
-                                    value={props.articleList.id}>
-                                </input>
                             </div>
                         </div>
-                        <div className="col-md-2 col-12">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">Nome</span>
-                                </div>
-                                <input type="text"
-                                    className="form-control"
-                                    readOnly={true}
-                                    value={props.articleList.nome}>
-                                </input>
-                            </div>
-                        </div>
-                        <div className="col-md-2 col-12">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">Stato</span>
-                                </div>
-                                <input type="text"
-                                    className="form-control"
-                                    readOnly={true}
-                                    value={props.articleList.stato}>
-                                </input>
-                            </div>
-                        </div>
-                        <div className="col-md-2 col-12">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">Data</span>
-                                </div>
-                                <input type="text"
-                                    className="form-control"
-                                    readOnly={true}
-                                    value={toDateInputValue(props.articleList.creationDate)}>
-                                </input>
-                            </div>
-                        </div>
-                        <div className="col-md-2 col-12">
-                            <button className="btn btn-primary"
+                        <div className="col-xl-2 col-12 px-0" style={{textAlign:"end"}}>
+                            <button className="btn btn-primary mx-1"
                                 onClick={props.saveClick}>Salva</button>
-                        </div>
-                        <div className="col-md-2 col-12">
                             <button className="btn btn-danger"
                                 onClick={props.deleteClick}>Elimina</button>
                         </div>

@@ -33,3 +33,23 @@
     overflow-y: scroll;
     margin-bottom: 10px;
 }
+
+.article-card{
+
+}
+
+.article-card {
+    font-size: 0.8em;
+}
+
+
+    .article-card .container .container {
+        border: 1px solid #999;
+        border-radius: 6px;
+    }
+
+.ellipsis {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

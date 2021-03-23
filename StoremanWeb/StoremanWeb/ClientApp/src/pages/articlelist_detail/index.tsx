@@ -74,10 +74,10 @@ export function ArticleListDetail() {
                 </div>
 
                 <div className="row">
-                    <div className="col-md-4 col-12">
+                    <div className="col-md-5 col-12 px-0">
                         <LeftList itemClicked={onLeftItemAddClick}></LeftList>
                     </div>
-                    <div className="col-md-8 col-12">
+                    <div className="col-md-7 col-12">
                         <RightList ref={rightListRef} listId={state.articleList.id}></RightList>
                     </div>
                 </div>
