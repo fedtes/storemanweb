@@ -53,7 +53,7 @@ export function ArticleListDetail() {
     }
     else {
         return (
-            <div className="container">
+            <div className="container" style={{maxWidth:"90%"}}>
                 
                 <div className="row">
                     <ArticleListHeader

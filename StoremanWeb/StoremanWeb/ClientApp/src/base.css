@@ -53,3 +53,12 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.bor-round {
+    border: 1px solid #999;
+    border-radius: 6px;
+}
+
+.txt-align-center{
+    text-align:center;
+}

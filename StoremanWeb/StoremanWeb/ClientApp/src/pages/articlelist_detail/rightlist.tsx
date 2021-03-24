@@ -2,10 +2,12 @@
 import { Article } from "../../api/models/index";
 import { useAPI } from "../../api/index";
 import { RightCard } from "./rightlist_card";
+import { Loader } from "../../route/PrivateRoute";
 
 type ArticleItem = Article & {isDirty: boolean}
 
 interface IState {
+    fetching: boolean,
     items: ArticleItem[]
 }
 
@@ -20,7 +22,7 @@ export interface RightListProps {
 export const RightList = React.forwardRef<IRef, RightListProps>(_RightList);
 
 function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
-    const [state, setState] = React.useState<IState>({ items: [] });
+    const [state, setState] = React.useState<IState>({ fetching: true, items: [] });
     const api = useAPI();
 
     const pushItem = (items: ArticleItem[], item: Article) => items.concat([{ ...item, isDirty: false }]);
@@ -59,13 +61,20 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
 
     ref.current = { addItem: addItem };
 
-    return (
-        <div className="container">
-            <div className="row">
-                {mapItems()}
+    if (state.fetching) {
+        api.getArticleItems(props.listId)
+            .then(a => a.map(x => { return { ...x, isDirty: false }; }))
+            .then(a => setState({ ...state, fetching: false, items: a }));
+        return (<Loader></Loader>)
+    } else {
+        return (
+            <div className="container bor-round" style={{ height: "85vh", overflowY: "scroll" }}>
+                <div className="row">
+                    {mapItems()}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 
 }
 

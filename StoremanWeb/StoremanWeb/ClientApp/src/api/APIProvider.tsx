@@ -84,6 +84,10 @@ export class APIProvider {
         return await this.get<ArticleList>(this.url(this.article_list_url) + "/" + id);
     }
 
+    public async getArticleItems(listId: number) {
+        return await this.get<Article[]>(this.url(this.article_list_url) + "/" + listId + "/item/");
+    }
+
     public async addArticleItem(id: number, listId: number) {
         return await this.post<Article>(this.url(this.article_list_url) + "/" + listId + "/item/" + id, {});
     }
