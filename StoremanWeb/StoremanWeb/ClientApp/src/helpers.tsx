@@ -1,4 +1,5 @@
-﻿export function toDateInputValue(date: Date) {
+﻿
+export function toDateInputValue(date: Date) {
     if (!date) return null;
     var d = new Date(date);
     var day = ("0" + d.getDate()).slice(-2);
@@ -9,4 +10,8 @@
 export function fromDateInputValue(date: string) {
     var x = date.split("-");
     return new Date(parseInt(x[0]), parseInt(x[1]), parseInt(x[2]));
+}
+
+export function round2(n: any) {
+    return Math.round((parseFloat(n) + Number.EPSILON) * 100) / 100;
 }

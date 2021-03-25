@@ -14,7 +14,8 @@ interface IState {
     fetching: boolean,
     isDirty: boolean,
     isNew: boolean,
-    articleList?: ArticleList
+    articleList?: ArticleList,
+    showLeft: boolean
 }
 
 const defaultArticleList: ArticleList = {
@@ -32,7 +33,8 @@ export function ArticleListDetail() {
         fetching: true,
         isDirty: false,
         isNew: id === "-1",
-        articleList: defaultArticleList
+        articleList: defaultArticleList,
+        showLeft: false
     });
 
     const rightListRef = React.useRef<IRef>();
@@ -53,7 +55,7 @@ export function ArticleListDetail() {
     }
     else {
         return (
-            <div className="container" style={{maxWidth:"90%"}}>
+            <div className="container px-xl-1 px-0 mx-auto" style={{maxWidth:"95%"}}>
                 
                 <div className="row">
                     <ArticleListHeader
@@ -62,22 +64,22 @@ export function ArticleListDetail() {
                         deleteClick={recordDelete} ></ArticleListHeader>
                 </div>
 
-                <div className="row d-md-none">
+                <div className="row d-lg-none">
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
-                            <div className="nav-link active"></div>
+                            <div className="nav-link ">Listino</div>
                         </li>
                         <li className="nav-item">
-                            <div className="nav-link"></div>
+                            <div className="nav-link active">Articoli</div>
                         </li>
                     </ul>
                 </div>
 
                 <div className="row">
-                    <div className="col-md-5 col-12 px-0">
+                    <div className={state.showLeft ? "col-lg-4 col-12 px-0" : "col-lg-4 col-12 px-0 d-none d-lg-block"}>
                         <LeftList itemClicked={onLeftItemAddClick}></LeftList>
                     </div>
-                    <div className="col-md-7 col-12">
+                    <div className={state.showLeft ? "col-lg-8 col-12 d-none d-lg-block" : "col-lg-8 col-12"}>
                         <RightList ref={rightListRef} listId={state.articleList.id}></RightList>
                     </div>
                 </div>

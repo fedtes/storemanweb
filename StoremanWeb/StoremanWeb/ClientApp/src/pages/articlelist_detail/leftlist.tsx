@@ -48,7 +48,7 @@ export function LeftList(props:any) {
         return <Loader></Loader>
     } else {
         return (
-            <div className="containter p-4 bor-round">
+            <div className="containter pl-4 pr-1">
 
                 <div className="row">
                     <div className="col-12 py-2">
@@ -83,7 +83,7 @@ export function LeftList(props:any) {
                     </div>
                 </div>
 
-                <div className="row" style={{height:"60vh", overflowY:"scroll"}}>
+                <div className="row" style={{maxHeight:"60vh", overflowY:"scroll"}}>
                     {mapItems()}
                 </div>
 

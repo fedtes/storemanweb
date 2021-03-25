@@ -68,7 +68,7 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
         return (<Loader></Loader>)
     } else {
         return (
-            <div className="container bor-round" style={{ height: "85vh", overflowY: "scroll" }}>
+            <div className="container w-100 mw-100" style={{ maxHeight: "85vh", overflowY: "scroll" }}>
                 <div className="row">
                     {mapItems()}
                 </div>

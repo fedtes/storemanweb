@@ -62,3 +62,15 @@
 .txt-align-center{
     text-align:center;
 }
+
+.txt-align-start {
+    text-align: start;
+}
+
+.txt-grey{
+    color:#666;
+}
+
+.undeline {
+    border-bottom: 1px solid #17a2b8;
+}

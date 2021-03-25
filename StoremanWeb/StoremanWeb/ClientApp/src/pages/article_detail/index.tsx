@@ -4,6 +4,7 @@ import { useAPI, appPath } from "../../api/index";
 import { useHistory, useParams } from "react-router";
 import { Article } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
+import { round2 } from "../../helpers";
 
 
 interface IState {
@@ -36,7 +37,7 @@ export function ArticleDetail() {
     const history = useHistory();
 
     const formulaPrezzo = (prezzoBase: number, ricavo: number) => {
-        return Math.round(((prezzoBase * (1 + ricavo / 100)) + Number.EPSILON) * 100) / 100;
+        return round2(prezzoBase * (1 + ricavo / 100));
     };
 
     const setPrezzo = (value:number) => {
