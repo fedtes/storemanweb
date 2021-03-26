@@ -23,7 +23,7 @@ export function ArticleListHeader(props: IArticleListHeaderProps) {
                 <div className="container px-0">
                     <div className="row w-100">
                         <div className="col-xl-10 col-12 px-0">
-                            <div className="container">
+                            <div className="container h-100">
                                 <div className="row w-100">
                                     <div className="col-xl-3 col-12">
                                         <span>ID: {props.articleList.id}</span>
@@ -41,8 +41,6 @@ export function ArticleListHeader(props: IArticleListHeaderProps) {
                             </div>
                         </div>
                         <div className="col-xl-2 col-12 px-0" style={{textAlign:"end"}}>
-                            <button className="btn btn-primary mx-1"
-                                onClick={props.saveClick}>Salva</button>
                             <button className="btn btn-danger"
                                 onClick={props.deleteClick}>Elimina</button>
                         </div>

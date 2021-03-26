@@ -14,8 +14,13 @@ export function RightCard(props: ICardProps) {
         <div className="col-12 px-1">
             <div className="container bor-round py-1 my-1">
                 <div className="row">
-                    <div className="col-1 pt-3 px-0 txt-align-center">
-                        <button className="btn btn-danger" onClick={() => props.removeItem(props.id)}>X</button>
+                    <div className="col-1 px-0 txt-align-center">
+                        <div className="flex-center-container">
+                            <button
+                            className="btn btn-danger btn-round bi-trash"
+                            onClick={() => props.removeItem(props.id)}>
+                            </button>
+                        </div>
                     </div>
                     <div className="col-10 px-1 txt-align-center">
                         <div className="container">
@@ -33,14 +38,14 @@ export function RightCard(props: ICardProps) {
                             </div>
                             <div className="row mb-2">
                                 <div className="col-3 px-1">
-                                    <div className="txt-grey txt-align-start">PZ. UNITARIO</div>
+                                    <div className="txt-grey txt-align-start">PZ. ACQUISTO</div>
                                     <div className="input-group">
                                         <input type="number"
                                             className="form-control"
-                                            value={round2(props.prezzoUnitario)}
+                                            value={round2(props.prezzoAcquisto)}
                                             step="0.01"
                                             min="0"
-                                            onChange={e => props.fieldChange(props.id, "prezzoUnitario", e.currentTarget.value)}>
+                                            onChange={e => props.fieldChange(props.id, "prezzoAcquisto", e.currentTarget.value)}>
                                         </input>
                                         <div className="input-group-append">
                                             <div className="input-group-text">€</div>
@@ -96,8 +101,13 @@ export function RightCard(props: ICardProps) {
                         </div>
                         
                     </div>
-                    <div className="col-1 pt-3 px-0 txt-align-center">
-                        <button disabled={!props.isDirty} className="btn btn-primary" onClick={() => props.saveItem(props.id)}>Save</button>
+                    <div className="col-1 px-0 txt-align-center">
+                        <div className="flex-center-container">
+                            <button disabled={!props.isDirty}
+                                className="btn btn-primary btn-round bi-check2"
+                                onClick={() => props.saveItem(props.id)}>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

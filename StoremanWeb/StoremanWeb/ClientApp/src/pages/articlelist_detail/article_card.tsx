@@ -25,8 +25,13 @@ export function ArticleCard(props: IProps) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-2 pl-0" style={{textAlign:"end"}}>
-                        <button className="btn btn-primary p-1 h-100" onClick={() => props.onClick(props.id)}>{">>"}</button>
+                    <div className="col-2 pl-0" style={{ textAlign: "end" }}>
+                        <div className="flex-center-container">
+                            <button
+                                className="btn btn-primary btn-round bi-cart-plus"
+                                onClick={() => props.onClick(props.id)}>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

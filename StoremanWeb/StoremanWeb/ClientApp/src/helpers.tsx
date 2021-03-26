@@ -15,3 +15,7 @@ export function fromDateInputValue(date: string) {
 export function round2(n: any) {
     return Math.round((parseFloat(n) + Number.EPSILON) * 100) / 100;
 }
+
+export function formulaPrezzo(prezzoBase: number, ricavo: number)  {
+    return round2(prezzoBase * (1 + ricavo / 100));
+};

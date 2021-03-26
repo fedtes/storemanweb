@@ -3,6 +3,7 @@ import { Article } from "../../api/models/index";
 import { useAPI } from "../../api/index";
 import { RightCard } from "./rightlist_card";
 import { Loader } from "../../route/PrivateRoute";
+import { formulaPrezzo } from "../../helpers";
 
 type ArticleItem = Article & {isDirty: boolean}
 
@@ -50,6 +51,11 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
         let item = state.items.find(v => v.id === id);
         item[field] = value;
         item.isDirty = true;
+
+        if (field !== "totale") {
+            item.totale = formulaPrezzo(item.prezzoAcquisto, item.ricavo) * item.quantita;
+        }
+
         setState({ ...state });
     };
 

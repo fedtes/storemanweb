@@ -4,7 +4,7 @@ import { useAPI, appPath } from "../../api/index";
 import { useHistory, useParams } from "react-router";
 import { Article } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
-import { round2 } from "../../helpers";
+import { round2, formulaPrezzo } from "../../helpers";
 
 
 interface IState {
@@ -35,10 +35,6 @@ export function ArticleDetail() {
     const [state, setState] = React.useState<IState>({ fetching: true, isDirty: false, isNew: id === "-1", article: { ...defaultArticle} });
     const api = useAPI();
     const history = useHistory();
-
-    const formulaPrezzo = (prezzoBase: number, ricavo: number) => {
-        return round2(prezzoBase * (1 + ricavo / 100));
-    };
 
     const setPrezzo = (value:number) => {
         const p = formulaPrezzo(value, state.article.ricavo);

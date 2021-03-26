@@ -42,6 +42,10 @@ export function ArticleListDetail() {
     const recordSave = () => { };
     const recordDelete = () => { };
 
+    const changeTab = (t: number) => {
+        setState({ ...state, showLeft: (t === 0 ? false : true) });
+    };
+
     /* ------------- Sync beteew left-right ------------------- */ 
     const onLeftItemAddClick = (id: number) => {
         rightListRef.current.addItem(id);
@@ -64,22 +68,22 @@ export function ArticleListDetail() {
                         deleteClick={recordDelete} ></ArticleListHeader>
                 </div>
 
-                <div className="row d-lg-none">
-                    <ul className="nav nav-tabs">
-                        <li className="nav-item">
-                            <div className="nav-link ">Listino</div>
+                <div className="row d-xl-none">
+                    <ul className="nav nav-tabs w-100">
+                        <li className="nav-item" onClick={() => changeTab(1)}>
+                            <div className={"nav-link " + (state.showLeft ? "active" : "")}>Listino</div>
                         </li>
-                        <li className="nav-item">
-                            <div className="nav-link active">Articoli</div>
+                        <li className="nav-item" onClick={() => changeTab(0)}>
+                            <div className={"nav-link " + (state.showLeft ? "" : "active")}>Articoli</div>
                         </li>
                     </ul>
                 </div>
 
                 <div className="row">
-                    <div className={state.showLeft ? "col-lg-4 col-12 px-0" : "col-lg-4 col-12 px-0 d-none d-lg-block"}>
+                    <div className={state.showLeft ? "col-xl-4 col-12 px-0" : "col-xl-4 col-12 px-0 d-none d-xl-block"}>
                         <LeftList itemClicked={onLeftItemAddClick}></LeftList>
                     </div>
-                    <div className={state.showLeft ? "col-lg-8 col-12 d-none d-lg-block" : "col-lg-8 col-12"}>
+                    <div className={state.showLeft ? "col-xl-8 col-12 d-none d-xl-block" : "col-xl-8 col-12"}>
                         <RightList ref={rightListRef} listId={state.articleList.id}></RightList>
                     </div>
                 </div>

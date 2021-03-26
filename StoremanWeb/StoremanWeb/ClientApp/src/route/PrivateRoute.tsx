@@ -31,7 +31,11 @@ class PrivateRoute extends Route {
 
 export function Loader() {
     return (
-        <div>I'm loading</div>
+        <div className="flex-center-container">
+            <div className="spinner-border text-info" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+        </div>
     );
 };
 

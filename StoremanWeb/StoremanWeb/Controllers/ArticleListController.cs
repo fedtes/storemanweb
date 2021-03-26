@@ -221,7 +221,7 @@ namespace StoremanWeb.Controllers
                     PrezzoUnitario = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100),
                     UnitaMisura = article.UnitaMisura,
                     Quantita = article.Quantita,
-                    Totale = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100) * article.Quantita
+                    Totale = article.Totale
                 });
 
             return await this.GetArticle(id, article.ID);
