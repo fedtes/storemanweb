@@ -31,6 +31,7 @@ namespace StoremanWeb
             services.AddSingleton<SecurityService>();
             services.AddSingleton<UserService>();
             services.AddSingleton<DBService>();
+            services.AddSingleton<ExcelService>();
 
             services
                 .AddAuthentication(DefaultJwtScheme)

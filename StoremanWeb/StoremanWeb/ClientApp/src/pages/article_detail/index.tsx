@@ -47,9 +47,11 @@ export function ArticleDetail() {
     };
 
     const recordSave = () => {
-        api.updateArticle(state.article)
-            .then(() => setState({ ...state, isDirty: false, fetching: true }))
-            .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));
+        if (window.confirm("Confermi di voler modificare l'elemento?")) {
+            api.updateArticle(state.article)
+                .then(() => setState({ ...state, isDirty: false, fetching: true }))
+                .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));
+        }
     };
 
     const recordDelete = () => {

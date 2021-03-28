@@ -9,7 +9,7 @@ export function toDateInputValue(date: Date) {
 
 export function fromDateInputValue(date: string) {
     var x = date.split("-");
-    return new Date(parseInt(x[0]), parseInt(x[1]), parseInt(x[2]));
+    return new Date(parseInt(x[0]), parseInt(x[1])-1, parseInt(x[2]));
 }
 
 export function round2(n: any) {

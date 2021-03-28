@@ -50,6 +50,12 @@ export function ArticleGrid() {
                 
                 <div className="row list-filter">
                     <div className="col-md-4 col-12">
+                        <input type="text" placeholder="costruttore"
+                            className="form-control"
+                            value={state.filter.costruttore}
+                            onInput={e => setState({ ...state, filter: { ...state.filter, costruttore: e.currentTarget.value } })}></input>
+                    </div>
+                    <div className="col-md-4 col-12">
                         <input type="text" placeholder="codice"
                             className="form-control"
                             value={state.filter.codice}
@@ -60,12 +66,6 @@ export function ArticleGrid() {
                             className="form-control"
                             value={state.filter.descrizione}
                             onInput={e => setState({ ...state, filter: { ...state.filter, descrizione: e.currentTarget.value } })}></input>
-                    </div>
-                    <div className="col-md-4 col-12">
-                        <input type="text" placeholder="costruttore"
-                            className="form-control"
-                            value={state.filter.costruttore}
-                            onInput={e => setState({ ...state, filter: { ...state.filter, costruttore: e.currentTarget.value } })}></input>
                     </div>
                 </div>
                 <div className="row">
@@ -89,8 +89,8 @@ export function ArticleGrid() {
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th scope="col">Codice</th>
                                         <th scope="col">Costruttore</th>
+                                        <th scope="col">Codice</th>
                                         <th scope="col">Descrizione</th>
                                         <th scope="col">Prz.Acquisto</th>
                                         <th scope="col">Scorta</th>
@@ -147,8 +147,8 @@ export function ArticleGrid() {
 function TableRow(props: any) {
     return (
         <tr key={props.id} onClick={() => props.rowClicked(props.id)}>
-            <td>{props.codice}</td>
             <td>{props.costruttore}</td>
+            <td>{props.codice}</td>
             <td>{props.descrizione}</td>
             <td>{props.prezzoAcquisto}</td>
             <td>{props.scorta}</td>

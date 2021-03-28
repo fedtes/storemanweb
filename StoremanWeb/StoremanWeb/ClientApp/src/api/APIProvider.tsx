@@ -23,8 +23,9 @@ export class APIProvider {
     private ping_url: string = "/user/ping";
     private refresh_url: string = "/user/refreshtoken";
 
-    private article_url: string = "/article"
-    private article_list_url: string = "/articlelist"
+    private article_url: string = "/article";
+    private article_list_url: string = "/articlelist";
+    private download_url: string = "/download";
     
     public constructor() {
         this.origin = window.location.origin;
@@ -84,6 +85,14 @@ export class APIProvider {
         return await this.get<ArticleList>(this.url(this.article_list_url) + "/" + id);
     }
 
+    public async deleteArticleList(id: number) {
+        return await this.delete<ArticleList>(this.url(this.article_list_url) + "/" + id, {});
+    }
+
+    public async updateArticleList(articleList: ArticleList) {
+        return await this.put(this.url(this.article_list_url), articleList);
+    }
+
     public async getArticleItems(listId: number) {
         return await this.get<Article[]>(this.url(this.article_list_url) + "/" + listId + "/item/");
     }
@@ -98,6 +107,42 @@ export class APIProvider {
 
     public async updateArticleItem(item: Article, listId: number) {
         return await this.put(this.url(this.article_list_url) + "/" + listId + "/item", item);
+    }
+
+    /* --------------------- DOWNLOAD --------------------*/
+
+    public async downloadArticleList(id: number) {
+
+        const opts = {
+            headers: {
+                "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "Authorization": "bearer " + this.claim.token
+            }
+        };
+
+        return fetch(this.url(this.download_url) + "/articlelist/" + id, opts)
+            .then(resp => {
+                if (resp.status === 200) {
+                    return resp.blob();
+                } else if (resp.status === 401) {
+                    this.refresh_token()
+                        .then(r => {
+                            if (r === "OK")
+                                return this.downloadArticleList(id);
+                            else
+                                throw "Authentication failure";
+                        });
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            });
     }
 
 

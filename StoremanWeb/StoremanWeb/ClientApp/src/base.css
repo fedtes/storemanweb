@@ -75,6 +75,10 @@
     border-bottom: 1px solid #17a2b8;
 }
 
+.overline {
+    border-top: 1px solid #17a2b8;
+}
+
 @media (min-width: 576px){
     .container {
         max-width:100%;

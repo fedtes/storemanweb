@@ -117,12 +117,15 @@ namespace StoremanWeb.Controllers
             if (id == -1)
                 return new StatusCodeResult(400);
 
+            /* delete all items first */
+            await dbservice.DBContext.Query("Articles")
+                .Where("ListID", id)
+                .DeleteAsync();
+
+            /* then the article list */
             await dbservice.DBContext.Query("ArticleList")
                 .Where("ID", id)
-                .UpdateAsync(new
-                {
-                    HistoryStatus = 2
-                });
+                .DeleteAsync();
 
             return new JsonResult(new { message = "OK" });
         }

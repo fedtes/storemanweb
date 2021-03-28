@@ -38,7 +38,7 @@ const App = () => {
                     </PrivateRoute>
 
                     <Route path={appPath("/")}>
-                        <Redirect to={{ pathname: appPath("/article") }}></Redirect>
+                        <Redirect to={{ pathname: appPath("/articlelist") }}></Redirect>
                     </Route>
                 </Switch>
             </Router>
@@ -56,10 +56,10 @@ const Navbar = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <NavLink className="nav-link" to={appPath("/article")}>Articoli</NavLink>
+                        <NavLink className="nav-link" to={appPath("/articlelist")}>Distinte</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to={appPath("/articlelist")}>Distinte</NavLink>
+                        <NavLink className="nav-link" to={appPath("/article")}>Articoli</NavLink>
                     </li>
                 </ul>
             </div>

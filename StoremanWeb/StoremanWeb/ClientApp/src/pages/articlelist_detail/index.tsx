@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { useAPI, appPath } from "../../api/index";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { Article, ArticleList } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
 import { ArticleListHeader } from "./header";
@@ -28,6 +28,7 @@ const defaultArticleList: ArticleList = {
 
 export function ArticleListDetail() {
     const { id } = useParams();
+    const history = useHistory();
     const api = useAPI();
     const [state, setState] = React.useState<IState>({
         fetching: true,
@@ -39,8 +40,24 @@ export function ArticleListDetail() {
 
     const rightListRef = React.useRef<IRef>();
 
-    const recordSave = () => { };
-    const recordDelete = () => { };
+    const recordMarkDone = () => {
+        if (window.confirm("Marca come scaricato?")) {
+            state.articleList.stato = "Scaricata";
+            api.updateArticleList(state.articleList)
+                .then(() => setState({...state, fetching:true}))
+                .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));
+        }
+    };
+    const recordDownload = () => {
+        api.downloadArticleList(state.articleList.id);
+    };
+    const recordDelete = () => {
+        if (window.confirm("Sei sicuro di voler eliminare l'elemento?")) {
+            api.deleteArticleList(state.articleList.id)
+                .then(() => history.push(appPath("/articlelist")))
+                .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));
+        }
+    };
 
     const changeTab = (t: number) => {
         setState({ ...state, showLeft: (t === 0 ? false : true) });
@@ -64,7 +81,8 @@ export function ArticleListDetail() {
                 <div className="row">
                     <ArticleListHeader
                         articleList={state.articleList}
-                        saveClick={recordSave}
+                        markDone={recordMarkDone}
+                        dowload={recordDownload}
                         deleteClick={recordDelete} ></ArticleListHeader>
                 </div>
 

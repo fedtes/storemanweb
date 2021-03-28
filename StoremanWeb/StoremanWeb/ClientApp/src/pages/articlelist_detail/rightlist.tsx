@@ -74,9 +74,16 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
         return (<Loader></Loader>)
     } else {
         return (
-            <div className="container w-100 mw-100" style={{ maxHeight: "85vh", overflowY: "scroll" }}>
+            <div className="container w-100 mw-100" style={{ maxHeight: "75vh", overflowY: "scroll" }}>
                 <div className="row">
                     {mapItems()}
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <div className="overline">
+                            <span className="txt-grey">TOTALE: </span><span>{state.items.map(x=> x.totale).reduce((acc, v)=> acc + v, 0)}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

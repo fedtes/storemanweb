@@ -6,8 +6,9 @@ import { toDateInputValue } from "../../helpers";
 
 export interface IArticleListHeaderProps {
     articleList: ArticleList,
-    saveClick: () => void,
-    deleteClick: () => void
+    deleteClick: () => void,
+    dowload: () => void,
+    markDone: () => void
 }
 
 export function ArticleListHeader(props: IArticleListHeaderProps) {
@@ -41,8 +42,15 @@ export function ArticleListHeader(props: IArticleListHeaderProps) {
                             </div>
                         </div>
                         <div className="col-xl-2 col-12 px-0" style={{textAlign:"end"}}>
-                            <button className="btn btn-danger"
-                                onClick={props.deleteClick}>Elimina</button>
+                            <button className="btn btn-success bi-check2-square mx-1"
+                                title="Segna come scaricato"
+                                onClick={props.markDone}></button>
+                            <button className="btn btn-primary bi-cloud-arrow-down mx-1"
+                                title="Scarica"
+                                onClick={props.dowload}></button>
+                            <button className="btn btn-danger bi-trash mx-1"
+                                title="Elimina"
+                                onClick={props.deleteClick}></button>
                         </div>
                     </div>
                 </div>

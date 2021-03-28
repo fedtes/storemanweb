@@ -24,7 +24,7 @@ namespace StoremanWeb.Models
         /// [NR = numero]
         /// </summary>
         public string UnitaMisura;
-        public int Quantita;
+        public double Quantita;
         public double Totale;
     }
 }
