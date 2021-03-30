@@ -1,5 +1,6 @@
 ﻿import * as $ from 'jquery';
 import { Article, ArticleList } from './models/index';
+import { makeid } from '../helpers';
 
 
 interface IClaim {
@@ -70,7 +71,7 @@ export class APIProvider {
         return await this.get<ArticleList[]>(this.url(this.article_list_url), {
             page: page,
             nome: filter.nome ? "%" + filter.nome + "%" : null,
-            stato: filter.stato ? "%" + filter.stato + "%" : null,
+            stato: filter.stato,
             dateFrom: filter.dateFrom ? filter.dateFrom.toJSON() : null,
             dateTo: filter.dateTo ? filter.dateTo.toJSON() : null,
         });
@@ -138,6 +139,7 @@ export class APIProvider {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.style.display = 'none';
+                a.download = makeid(5);
                 a.href = url;
                 document.body.appendChild(a);
                 a.click();

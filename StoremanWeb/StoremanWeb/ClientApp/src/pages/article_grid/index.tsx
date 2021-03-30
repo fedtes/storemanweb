@@ -49,19 +49,22 @@ export function ArticleGrid() {
             <div className="container mx-0 mx-xl-auto" style={{ maxWidth:"unset"}}>
                 
                 <div className="row list-filter">
-                    <div className="col-md-4 col-12">
+                    <div className="col-md-4 col-12 pt-1">
+                        <label className="mb-0">Costruttore</label>
                         <input type="text" placeholder="costruttore"
                             className="form-control"
                             value={state.filter.costruttore}
                             onInput={e => setState({ ...state, filter: { ...state.filter, costruttore: e.currentTarget.value } })}></input>
                     </div>
-                    <div className="col-md-4 col-12">
+                    <div className="col-md-4 col-12 pt-1">
+                        <label className="mb-0">Codice</label>
                         <input type="text" placeholder="codice"
                             className="form-control"
                             value={state.filter.codice}
                             onInput={e => setState({ ...state, filter: {...state.filter, codice: e.currentTarget.value } })}></input>
                     </div>
-                    <div className="col-md-4 col-12">
+                    <div className="col-md-4 col-12 pt-1">
+                        <label className="mb-0">Descrizione</label>
                         <input type="text" placeholder="descrizione"
                             className="form-control"
                             value={state.filter.descrizione}

@@ -94,25 +94,33 @@ export function ArticleListGrid() {
             <div className="container mx-0 mx-xl-auto" style={{ maxWidth: "unset" }}>
 
                 <div className="row list-filter">
-                    <div className="col-md-3 col-12">
+                    <div className="col-md-3 col-12 pt-1">
+                        <label className="mb-0">Nome</label>
                         <input type="text" placeholder="nome"
                             className="form-control"
                             value={state.filter.nome}
                             onInput={e => setState({ ...state, filter: { ...state.filter, nome: e.currentTarget.value} })}></input>
                     </div>
-                    <div className="col-md-3 col-12">
-                        <input type="text" placeholder="stato"
-                            className="form-control"
-                            value={state.filter.stato}
-                            onInput={e => setState({ ...state, filter: { ...state.filter, stato: e.currentTarget.value } })}></input>
+                    <div className="col-md-3 col-12 pt-1">
+                        <label className="mb-0">Stato</label>
+                        <select className="form-control"
+                            placeholder="stato"
+                            onChange={e => setState({ ...state, filter: { ...state.filter, stato: e.currentTarget.value } })}
+                            value={state.filter.stato}>
+                            <option></option>
+                            <option>Da Scaricare</option>
+                            <option>Scaricata</option>
+                        </select>
                     </div>
-                    <div className="col-md-3 col-12">
+                    <div className="col-md-3 col-12 pt-1">
+                        <label className="mb-0">Da data</label>
                         <input type="date" placeholder="da data"
                             className="form-control"
                             value={toDateInputValue(state.filter.dateFrom)}
                             onInput={e => setState({ ...state, filter: { ...state.filter, dateFrom: fromDateInputValue(e.currentTarget.value) } })}></input>
                     </div>
-                    <div className="col-md-3 col-12">
+                    <div className="col-md-3 col-12 pt-1">
+                        <label className="mb-0">A data</label>
                         <input type="date" placeholder="a data"
                             className="form-control"
                             value={toDateInputValue(state.filter.dateTo)}

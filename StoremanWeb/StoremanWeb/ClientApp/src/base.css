@@ -23,10 +23,10 @@
     width: 80px;
 }
 
-.list-filter input {
+/*.list-filter input, .list-filter select {
     width: 100%;
     margin-top: 5px;
-}
+}*/
 
 .list-table div {
     max-height: 75vh;

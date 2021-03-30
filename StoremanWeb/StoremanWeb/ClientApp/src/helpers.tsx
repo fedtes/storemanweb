@@ -19,3 +19,14 @@ export function round2(n: any) {
 export function formulaPrezzo(prezzoBase: number, ricavo: number)  {
     return round2(prezzoBase * (1 + ricavo / 100));
 };
+
+
+export function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}

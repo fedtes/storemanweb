@@ -3,7 +3,7 @@ import { Article } from "../../api/models/index";
 import { useAPI } from "../../api/index";
 import { RightCard } from "./rightlist_card";
 import { Loader } from "../../route/PrivateRoute";
-import { formulaPrezzo } from "../../helpers";
+import { formulaPrezzo, round2 } from "../../helpers";
 
 type ArticleItem = Article & {isDirty: boolean}
 
@@ -74,14 +74,16 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
         return (<Loader></Loader>)
     } else {
         return (
-            <div className="container w-100 mw-100" style={{ maxHeight: "75vh", overflowY: "scroll" }}>
-                <div className="row">
+            <div className="container w-100 mw-100" >
+                <div className="row" style={{ maxHeight: "75vh", overflowY: "scroll" }}>
                     {mapItems()}
                 </div>
                 <div className="row">
-                    <div className="col">
-                        <div className="overline">
-                            <span className="txt-grey">TOTALE: </span><span>{state.items.map(x=> x.totale).reduce((acc, v)=> acc + v, 0)}</span>
+                    <div className="col pt-2">
+                        <div className="overline pt-1" style={{ fontSize: "1.5em" }}>
+                            <span className="txt-grey">TOTALE: </span>
+                            <span>{round2(state.items.map(x => x.totale).reduce((acc:any, v:any) => parseFloat(acc) + parseFloat(v), 0))}</span>
+                            <span> €</span>
                         </div>
                     </div>
                 </div>
