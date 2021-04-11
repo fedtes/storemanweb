@@ -39,7 +39,12 @@ export function ArticleListDetail() {
     });
 
     const rightListRef = React.useRef<IRef>();
-
+    const recordChangeName = (value:string) => {
+        state.articleList.nome = value;
+        api.updateArticleList(state.articleList)
+            .then(() => setState({ ...state, fetching: true }))
+            .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));
+    };
     const recordMarkDone = () => {
         if (window.confirm("Marca come scaricato?")) {
             state.articleList.stato = "Scaricata";
@@ -80,6 +85,7 @@ export function ArticleListDetail() {
                 
                 <div className="row">
                     <ArticleListHeader
+                        newName={recordChangeName}
                         articleList={state.articleList}
                         markDone={recordMarkDone}
                         dowload={recordDownload}

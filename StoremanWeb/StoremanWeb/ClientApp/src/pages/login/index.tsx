@@ -11,7 +11,14 @@ export function Login() {
     const showWrongUsrPsw = () => {
         $("#msd-err").css("display", "unset");
 
-    }
+    };
+
+    const onEnter = (e: any) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            onLoginClick();
+        }
+    };
 
     const onLoginClick = () => {
         api.login(state.username, state.password)
@@ -36,14 +43,19 @@ export function Login() {
                                     <label>Username</label>
                                 </div>
                                 <div className="col-12">
-                                    <input type="text" id="txtusername"
+                                    <input type="text"
+                                        id="txtusername"
+                                        onKeyDown={onEnter}
                                         onInput={e => setState({ ...state, username: e.currentTarget.value })}></input>
                                 </div>
                                 <div className="col-12">
                                     <label>Password</label>
                                 </div>
                                 <div className="col-12">
-                                    <input type="password" id="txtpassword"
+                                    <input
+                                        type="password"
+                                        id="txtpassword"
+                                        onKeyDown={onEnter}
                                         onInput={e => setState({ ...state, password: e.currentTarget.value })}></input>
                                 </div>
                                 <div className="col-12 login-btn">

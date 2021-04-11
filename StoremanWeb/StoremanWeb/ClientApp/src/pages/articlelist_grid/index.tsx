@@ -36,6 +36,13 @@ export function ArticleListGrid() {
         history.push(appPath("/articlelist/" + ID));
     };
 
+    const onEnter = (e: any) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            search();
+        }
+    };
+
     const search = () => {
         setState({ ...state, fetching: true });
     }
@@ -98,6 +105,7 @@ export function ArticleListGrid() {
                         <label className="mb-0">Nome</label>
                         <input type="text" placeholder="nome"
                             className="form-control"
+                            onKeyDown={onEnter}
                             value={state.filter.nome}
                             onInput={e => setState({ ...state, filter: { ...state.filter, nome: e.currentTarget.value} })}></input>
                     </div>
@@ -105,6 +113,7 @@ export function ArticleListGrid() {
                         <label className="mb-0">Stato</label>
                         <select className="form-control"
                             placeholder="stato"
+                            onKeyDown={onEnter}
                             onChange={e => setState({ ...state, filter: { ...state.filter, stato: e.currentTarget.value } })}
                             value={state.filter.stato}>
                             <option></option>
@@ -115,6 +124,7 @@ export function ArticleListGrid() {
                     <div className="col-md-3 col-12 pt-1">
                         <label className="mb-0">Da data</label>
                         <input type="date" placeholder="da data"
+                            onKeyDown={onEnter}
                             className="form-control"
                             value={toDateInputValue(state.filter.dateFrom)}
                             onInput={e => setState({ ...state, filter: { ...state.filter, dateFrom: fromDateInputValue(e.currentTarget.value) } })}></input>
@@ -122,6 +132,7 @@ export function ArticleListGrid() {
                     <div className="col-md-3 col-12 pt-1">
                         <label className="mb-0">A data</label>
                         <input type="date" placeholder="a data"
+                            onKeyDown={onEnter}
                             className="form-control"
                             value={toDateInputValue(state.filter.dateTo)}
                             onInput={e => setState({ ...state, filter: { ...state.filter, dateTo: fromDateInputValue(e.currentTarget.value) } })}></input>

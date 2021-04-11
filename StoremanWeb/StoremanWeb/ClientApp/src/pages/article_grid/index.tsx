@@ -26,6 +26,13 @@ export function ArticleGrid() {
         history.push(appPath("/article/" + ID));
     };
 
+    const onEnter = (e: any) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            search();
+        }
+    };
+
     const search = () => {
         setState({ ...state, fetchStatus: 0 });
     }
@@ -53,6 +60,7 @@ export function ArticleGrid() {
                         <label className="mb-0">Costruttore</label>
                         <input type="text" placeholder="costruttore"
                             className="form-control"
+                            onKeyDown={onEnter}
                             value={state.filter.costruttore}
                             onInput={e => setState({ ...state, filter: { ...state.filter, costruttore: e.currentTarget.value } })}></input>
                     </div>
@@ -60,6 +68,7 @@ export function ArticleGrid() {
                         <label className="mb-0">Codice</label>
                         <input type="text" placeholder="codice"
                             className="form-control"
+                            onKeyDown={onEnter}
                             value={state.filter.codice}
                             onInput={e => setState({ ...state, filter: {...state.filter, codice: e.currentTarget.value } })}></input>
                     </div>
@@ -67,6 +76,7 @@ export function ArticleGrid() {
                         <label className="mb-0">Descrizione</label>
                         <input type="text" placeholder="descrizione"
                             className="form-control"
+                            onKeyDown={onEnter}
                             value={state.filter.descrizione}
                             onInput={e => setState({ ...state, filter: { ...state.filter, descrizione: e.currentTarget.value } })}></input>
                     </div>

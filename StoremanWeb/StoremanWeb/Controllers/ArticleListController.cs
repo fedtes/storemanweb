@@ -186,8 +186,8 @@ namespace StoremanWeb.Controllers
                     Ricavo = article.Ricavo,
                     PrezzoUnitario = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100),
                     UnitaMisura = article.UnitaMisura,
-                    Quantita = 1,
-                    Totale = article.PrezzoAcquisto * (1 + ((double)article.Ricavo) / 100) * 1
+                    Quantita = 0,
+                    Totale = 0
                 });
 
             return await this.GetArticle(id, newid);

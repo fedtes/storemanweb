@@ -35,12 +35,13 @@ namespace StoremanWeb.Services
                 worksheet.Cell("A1").SetValue("Costruttore");
                 worksheet.Cell("B1").SetValue("Codice");
                 worksheet.Cell("C1").SetValue("Descrizione");
-                worksheet.Cell("D1").SetValue("Prezzo Acquisto");
-                worksheet.Cell("E1").SetValue("Ricavo");
-                worksheet.Cell("F1").SetValue("Prezzo Unitario");
-                worksheet.Cell("G1").SetValue("Quantita");
+                // empty col
+                worksheet.Cell("E1").SetValue("Prezzo Acquisto");
+                worksheet.Cell("F1").SetValue("Ricavo");
+                worksheet.Cell("G1").SetValue("Prezzo Unitario");
                 worksheet.Cell("H1").SetValue("UnitaMisura");
-                worksheet.Cell("I1").SetValue("Totale");
+                worksheet.Cell("I1").SetValue("Quantita");
+                worksheet.Cell("J1").SetValue("Totale");
 
                 for (int i = 0; i < articles.Count(); i++)
                 {
@@ -56,29 +57,29 @@ namespace StoremanWeb.Services
                         .SetDataType(XLDataType.Text)
                         .SetValue<string>(articles[i].Descrizione);
 
-                    var cellD = worksheet.Cell(i + 2, "D")
+                    var cellD = worksheet.Cell(i + 2, "E")
                         .SetDataType(XLDataType.Number);
                     cellD.Style.NumberFormat.Format = "€ #,##0.00##";
                     cellD.SetValue<double>(articles[i].PrezzoAcquisto);
 
-                    worksheet.Cell(i + 2, "E")
+                    worksheet.Cell(i + 2, "F")
                         .SetDataType(XLDataType.Number)
                         .SetValue<int>(articles[i].Ricavo);
 
-                    var cellF = worksheet.Cell(i + 2, "F")
+                    var cellF = worksheet.Cell(i + 2, "G")
                         .SetDataType(XLDataType.Number);
                     cellF.Style.NumberFormat.Format = "€ #,##0.00##";
                     cellF.SetValue<double>(articles[i].PrezzoUnitario);
-
-                    worksheet.Cell(i + 2, "G")
-                        .SetDataType(XLDataType.Number)
-                        .SetValue<double>(articles[i].Quantita);
 
                     worksheet.Cell(i + 2, "H")
                         .SetDataType(XLDataType.Text)
                         .SetValue<string>(articles[i].UnitaMisura);
 
-                    var cellI = worksheet.Cell(i + 2, "I")
+                    worksheet.Cell(i + 2, "I")
+                        .SetDataType(XLDataType.Number)
+                        .SetValue<double>(articles[i].Quantita);
+
+                    var cellI = worksheet.Cell(i + 2, "J")
                         .SetDataType(XLDataType.Number);
                     cellI.Style.NumberFormat.Format = "€ #,##0.00##";
                     cellI.SetValue<double>(articles[i].Totale);

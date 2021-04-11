@@ -32,6 +32,13 @@ export function LeftList(props:any) {
         setState({ ...state, filter: { ...state.filter, descrizione: v } });
     }
 
+    const onEnter = (e: any) => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            refreshGrid();
+        }
+    };
+
     const refreshGrid = () => setState({ ...state, fetching: true });
 
     const itemClick = (id: number) => { props.itemClicked(id); };
@@ -54,8 +61,18 @@ export function LeftList(props:any) {
                     <div className="col-12 py-2">
                         <input type="text"
                             className="form-control"
+                            placeholder="costruttore"
+                            value={state.filter.costruttore}
+                            onKeyDown={onEnter}
+                            onChange={e => setCtrFilter(e.currentTarget.value)}>
+                        </input>
+                    </div>
+                    <div className="col-12 py-2">
+                        <input type="text"
+                            className="form-control"
                             placeholder="codice"
                             value={state.filter.codice}
+                            onKeyDown={onEnter}
                             onChange={e => setCodeFilter(e.currentTarget.value)}>
                         </input>
                     </div>
@@ -64,15 +81,8 @@ export function LeftList(props:any) {
                             className="form-control"
                             placeholder="descrizione"
                             value={state.filter.descrizione}
+                            onKeyDown={onEnter}
                             onChange={e => setDescFilter(e.currentTarget.value)}>
-                        </input>
-                    </div>
-                    <div className="col-12 py-2">
-                        <input type="text"
-                            className="form-control"
-                            placeholder="costruttore"
-                            value={state.filter.costruttore}
-                            onChange={e => setCtrFilter(e.currentTarget.value)}>
                         </input>
                     </div>
                 </div>
