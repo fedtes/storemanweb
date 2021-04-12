@@ -62,7 +62,7 @@ function _RightList(props: RightListProps, ref: React.MutableRefObject<IRef>) {
     const mapItems = () => {
         return state.items
             .map(i => { return { ...i, removeItem: removeItem, saveItem: saveItem, fieldChange: fieldChange } })
-            .map(i => <RightCard {...i}></RightCard>);
+            .map((i, index) => <RightCard key={index} {...i}></RightCard>);
     }
 
     ref.current = { addItem: addItem };

@@ -35,9 +35,7 @@ export function ArticleListHeader(props: IArticleListHeaderProps) {
                                     <div className="col-xl-3 col-12">
                                         <span>ID: {props.articleList.id}</span>
                                     </div>
-                                    <div className="col-xl-3 col-12">
-                                        <span>Nome: {props.articleList.nome}</span>
-                                    </div>
+                                    <ChangeNameInput edit={state.showModal} nome={props.articleList.nome} newName={onNewName}></ChangeNameInput>
                                     <div className="col-xl-3 col-12">
                                         <span>Stato: {props.articleList.stato}</span>
                                     </div>
@@ -50,7 +48,7 @@ export function ArticleListHeader(props: IArticleListHeaderProps) {
                         <div className="col-xl-2 col-12 px-0" style={{ textAlign: "end" }}>
                             <button className="btn btn-secondary bi-pencil mx-1"
                                 title="Cambia Nome"
-                                onClick={() => setState({showModal:true})}></button>
+                                onClick={() => setState({showModal: !state.showModal})}></button>
                             <button className="btn btn-primary bi-cloud-arrow-down mx-1"
                                 title="Scarica"
                                 onClick={props.dowload}></button>
@@ -64,41 +62,34 @@ export function ArticleListHeader(props: IArticleListHeaderProps) {
                     </div>
                 </div>
             </div>
-
-            <ChangeNameModal show={state.showModal} newName={onNewName}></ChangeNameModal>
         </nav>
     );
 
 }
 
 
-function ChangeNameModal(props: any) {
+function ChangeNameInput(props: {edit:boolean, nome:string, newName: (v:string) => void}) {
     var [state, setState] = React.useState("");
 
-    return (
-        <div className="app-modal" style={{ display: props.show ? "unset" : "none" }}>
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <input
-                                type="text"
-                                className="form-control"
-                                onChange={e => setState(e.currentTarget.value)}
-                                placeholder="Nuovo nome">
-                            </input>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <button
-                                className="btn btn-primary"
-                                onClick={() => props.newName(state)}
-                            >Salva</button>
-                        </div>
-                    </div>
-                </div>
+    if (!props.edit) {
+        return (
+            <div className="col-xl-3 col-12">
+                <span>Nome: {props.nome}</span>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div className="col-xl-3 col-12">
+                <input
+                    type="text"
+                    className="form-control inline-top"
+                    onChange={e => setState(e.currentTarget.value)}
+                    placeholder="Nuovo nome">
+                </input>
+                <button
+                    className="btn btn-primary bi-pencil ml-1 inline-top"
+                    onClick={() => props.newName(state)}></button>
+            </div>
+        );
+    }
 }
