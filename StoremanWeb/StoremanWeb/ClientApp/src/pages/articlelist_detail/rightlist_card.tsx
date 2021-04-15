@@ -42,11 +42,9 @@ export function RightCard(props: ICardProps) {
                                     <div className="txt-grey txt-align-start">PZ. ACQUISTO</div>
                                     <div className="input-group">
                                         <NumberInput
-                                            value={round2(props.prezzoAcquisto).toString()}
-                                            step="0.01"
-                                            min="0"
-                                            onChange={e => props.fieldChange(props.id, "prezzoAcquisto", e)}
-                                        ></NumberInput>
+                                            value={round2(props.prezzoAcquisto)}
+                                            onChange={e => props.fieldChange(props.id, "prezzoAcquisto", e)}>
+                                        </NumberInput>
                                         <div className="input-group-append">
                                             <div className="input-group-text">€</div>
                                         </div>
@@ -55,13 +53,11 @@ export function RightCard(props: ICardProps) {
                                 <div className="col-3 px-1">
                                     <div className="txt-grey txt-align-start">RICAVO</div>
                                     <div className="input-group">
-                                        <input type="number"
-                                            className="form-control"
+                                        <NumberInput
                                             value={props.ricavo}
-                                            step="1"
-                                            min="0"
-                                            onChange={e => props.fieldChange(props.id, "ricavo", e.currentTarget.value)}>
-                                        </input>
+                                            integer={true}
+                                            onChange={e => props.fieldChange(props.id, "ricavo", e)}>
+                                        </NumberInput>
                                         <div className="input-group-append">
                                             <div className="input-group-text">%</div>
                                         </div>
@@ -70,13 +66,10 @@ export function RightCard(props: ICardProps) {
                                 <div className="col-3 px-1">
                                     <div className="txt-grey txt-align-start">QUANTITA'</div>
                                     <div className="input-group">
-                                        <input type="number"
-                                            className="form-control"
+                                        <NumberInput
                                             value={props.quantita}
-                                            step="0.01"
-                                            min="0"
-                                            onChange={e => props.fieldChange(props.id, "quantita", e.currentTarget.value)}>
-                                        </input>
+                                            onChange={e => props.fieldChange(props.id, "quantita", e)}>
+                                        </NumberInput>
                                         <div className="input-group-append">
                                             <div className="input-group-text">{props.unitaMisura}</div>
                                         </div>
@@ -85,13 +78,10 @@ export function RightCard(props: ICardProps) {
                                 <div className="col-3 px-1">
                                     <div className="txt-grey txt-align-start">TOTALE</div>
                                     <div className="input-group">
-                                        <input type="number"
-                                            className="form-control"
+                                        <NumberInput 
                                             value={round2(props.totale)}
-                                            step="0.01"
-                                            min="0"
-                                            onChange={e => props.fieldChange(props.id, "totale", e.currentTarget.value)}>
-                                        </input>
+                                            onChange={e => props.fieldChange(props.id, "totale", e)}>
+                                        </NumberInput>
                                         <div className="input-group-append">
                                             <div className="input-group-text">€</div>
                                         </div>

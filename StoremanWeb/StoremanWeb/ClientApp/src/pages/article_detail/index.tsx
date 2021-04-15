@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router";
 import { Article } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
 import { round2, formulaPrezzo } from "../../helpers";
+import { NumberInput } from "../../components/NumberInput";
 
 
 interface IState {
@@ -115,31 +116,25 @@ export function ArticleDetail() {
                 <div className="row">
                     <div className="col-sm-4 col-12">
                         <label>Prezzo Acquisto</label>
-                        <input type="number"
-                            className="form-control"
-                            onInput={e => setPrezzo( parseFloat(e.currentTarget.value))}
-                            value={state.article.prezzoAcquisto}
-                            step="0.01"
-                            min="0"></input>
+                        <NumberInput
+                            onChange={e => setPrezzo(parseFloat(e))}
+                            value={state.article.prezzoAcquisto}>
+                        </NumberInput>
                     </div>
                     <div className="col-sm-4 col-12">
                         <label>Ricavo</label>
-                        <input type="number"
-                            className="form-control"
-                            onInput={e => setRicavo(parseInt(e.currentTarget.value))}
-                            value={state.article.ricavo}
-                            step="0"
-                            min="0"></input>
+                        <NumberInput
+                            onChange={e => setRicavo(parseInt(e))}
+                            integer={true}
+                            value={state.article.ricavo}>
+                        </NumberInput>
                     </div>
                     <div className="col-sm-4 col-12">
                         <label>Prezzo Unitario</label>
-                        <input type="number"
-                            className="form-control"
+                        <NumberInput 
                             readOnly={true}
-                            value={state.article.prezzoUnitario}
-                            step="0.01"
-                            min="0">
-                        </input>
+                            value={state.article.prezzoUnitario}>
+                        </NumberInput>
                     </div>
                 </div>
                 <div className="row">
@@ -154,13 +149,11 @@ export function ArticleDetail() {
                 <div className="row">
                     <div className="col-sm-4 col-12">
                         <label>Scorta</label>
-                        <input type="number"
-                            className="form-control"
-                            onInput={e => setState({ ...state, isDirty: true, article: { ...state.article, scorta: parseInt(e.currentTarget.value) } })}
+                        <NumberInput
+                            onChange={e => setState({ ...state, isDirty: true, article: { ...state.article, scorta: parseInt(e) } })}
                             value={state.article.scorta}
-                            step="1"
-                            min="0">
-                        </input>
+                            integer={true}>
+                        </NumberInput>
                     </div>
                     <div className="col-sm-4 col-12">
                         <label>Unita di Misura</label>
