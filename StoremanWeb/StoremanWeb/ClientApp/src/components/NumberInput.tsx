@@ -42,6 +42,7 @@ export class NumberInput extends React.Component<INumberInputProps, { textValue:
     render() {
         return (
             <input
+                inputMode="numeric"
                 className={this.props.className ? "form-control " + this.props.className : "form-control"}
                 readOnly={this.props.readOnly}
                 type="text"

@@ -4,6 +4,7 @@ import { useAPI, appPath } from "../../api/index";
 import { useHistory } from "react-router";
 import { Article } from "../../api/models/index";
 import { Loader } from "../../route/PrivateRoute";
+import { round2 } from "../../helpers";
 
 
 interface IState {
@@ -163,10 +164,10 @@ function TableRow(props: any) {
             <td>{props.costruttore}</td>
             <td>{props.codice}</td>
             <td>{props.descrizione}</td>
-            <td>{props.prezzoAcquisto}</td>
+            <td>{round2(props.prezzoAcquisto)}</td>
             <td>{props.scorta}</td>
             <td>{props.ricavo}</td>
-            <td>{props.prezzoUnitario}</td>
+            <td>{round2(props.prezzoUnitario)}</td>
         </tr>
     );
 }

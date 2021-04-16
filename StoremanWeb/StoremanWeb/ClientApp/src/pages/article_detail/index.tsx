@@ -91,7 +91,7 @@ export function ArticleDetail() {
             api.createArticle(state.article)
                 .then(a => {
                     history.push(appPath("/article/" + a.id));
-                    setState({ ...state, fetching: true, isNew: false });
+                    setState({ ...state, fetching: true, isNew: false, article:a });
                 })
                 .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));;
     };
@@ -150,7 +150,7 @@ export function ArticleDetail() {
                         <label>Prezzo Unitario</label>
                         <NumberInput 
                             readOnly={true}
-                            value={state.article.prezzoUnitario}>
+                            value={ round2(state.article.prezzoUnitario)}>
                         </NumberInput>
                     </div>
                 </div>

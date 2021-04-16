@@ -82,7 +82,7 @@ namespace StoremanWeb.Controllers
                     PrezzoAcquisto = article.PrezzoAcquisto,
                     Scorta = article.Scorta,
                     Ricavo = article.Ricavo,
-                    PrezzoUnitario = article.PrezzoAcquisto * (article.Ricavo / 100),
+                    PrezzoUnitario = article.PrezzoAcquisto * ((double)article.Ricavo / 100),
                     UnitaMisura = article.UnitaMisura,
                     Quantita = 0,
                     Totale = 0
