@@ -63,6 +63,19 @@ export function ArticleDetail() {
         }
     };
 
+    const recordClone = () => {
+        if (window.confirm("Clonare l'elemento?")) {
+            history.push(appPath("/article/-1"));
+            setState({
+                ...state,
+                isDirty: true,
+                fetching: false,
+                isNew: true,
+                article: { ...state.article, id: -1, codice: state.article.codice + "_copia" }
+            })
+        }
+    }
+
     const recordNew = () => {
         if ("" === state.article.codice || null === state.article.codice)
             window.alert("Campo codice obbligatorio");
@@ -76,7 +89,10 @@ export function ArticleDetail() {
             window.alert("Campo Descrizione obbligatorio");
         else
             api.createArticle(state.article)
-                .then(a => history.push(appPath("/article/" + a.id)))
+                .then(a => {
+                    history.push(appPath("/article/" + a.id));
+                    setState({ ...state, fetching: true, isNew: false });
+                })
                 .catch(() => window.alert("Errore inaspettato ricaricare la pagina"));;
     };
 
@@ -91,6 +107,7 @@ export function ArticleDetail() {
                 <div className="row">
                     <div className="col list-toolbar">
                         <button disabled={!state.isDirty} className="btn btn-primary" onClick={state.isNew ? recordNew : recordSave}>Salva</button>
+                        <button disabled={state.isNew} className="btn btn-primary" onClick={recordClone}>Clona</button>
                         <button disabled={state.isNew} className="btn btn-danger" onClick={recordDelete}>Elimina</button>
                     </div>
                 </div>
