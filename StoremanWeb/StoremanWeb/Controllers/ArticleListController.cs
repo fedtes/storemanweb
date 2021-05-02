@@ -138,8 +138,6 @@ namespace StoremanWeb.Controllers
             query.Where("ListID", id);
             query.Where("HistoryStatus", 1);
 
-            query.ForPage(page, 15);
-
             var a = await query.GetAsync<Article>();
 
             return new JsonResult(a);
