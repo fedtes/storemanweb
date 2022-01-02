@@ -22,6 +22,7 @@
     <None Remove="ClientApp\src\pages\article_detail\header.tsx" />
     <None Remove="ClientApp\src\pages\article_detail\index.tsx" />
     <None Remove="ClientApp\src\pages\article_grid\index.tsx" />
+    <None Remove="ClientApp\src\pages\config_page\index.tsx" />
     <None Remove="ClientApp\src\pages\login\index.tsx" />
     <None Remove="ClientApp\src\route\PrivateRoute.tsx" />
   </ItemGroup>
@@ -52,6 +53,7 @@
     <TypeScriptCompile Include="ClientApp\src\pages\articlelist_detail\header.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\article_detail\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\article_grid\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\config_page\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\login\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\route\PrivateRoute.tsx" />
     <Content Update="ClientApp\**\*.*" CopyToPublishDirectory="Never" />

@@ -135,5 +135,17 @@ namespace StoremanWeb.Controllers
 
             return new JsonResult(new { message = "OK" });
         }
+
+        [HttpPost]
+        [Route("storage/empty")]
+        public async Task<ActionResult> EmptyStorage()
+        {
+            await this.dbservice.DBContext.Query("Articles")
+                .Where("ListID", -1)
+                .Where("HistoryStatus", 1)
+                .UpdateAsync(new { Scorta = 0 });
+
+            return new JsonResult(new { message = "OK" });
+        }
     }
 }

@@ -30,5 +30,14 @@ namespace StoremanWeb.Controllers
                 "EX_" + DateTime.Now.ToString("yyyyMMddHHmm"));
         }
 
+        [HttpGet("article")]
+        public async Task<ActionResult> DownloadAll()
+        {
+            byte[] content = await excel.CreateArticleListExcel(-1);
+            return File(content,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "EX_ALL_" + DateTime.Now.ToString("yyyyMMddHHmm"));
+        }
+
     }
 }

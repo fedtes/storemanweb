@@ -113,18 +113,18 @@ export function ArticleDetail() {
                 </div>
                 <div className="row">
                     <div className="col-sm-4 col-12">
-                        <label>Codice</label>
-                        <input type="text"
-                            className="form-control"
-                            onInput={e => setState({ ...state, isDirty:true, article: {...state.article, codice: e.currentTarget.value}})}
-                            value={state.article.codice} ></input>
-                    </div>
-                    <div className="col-sm-4 col-12">
                         <label>Costruttore</label>
                         <input type="text"
                             className="form-control"
                             onInput={e => setState({ ...state, isDirty: true, article: { ...state.article, costruttore: e.currentTarget.value } })}
                             value={state.article.costruttore}></input>
+                    </div>
+                    <div className="col-sm-4 col-12">
+                        <label>Codice</label>
+                        <input type="text"
+                            className="form-control"
+                            onInput={e => setState({ ...state, isDirty:true, article: {...state.article, codice: e.currentTarget.value}})}
+                            value={state.article.codice} ></input>
                     </div>
                     <div className="col-sm-4 col-12">
                         

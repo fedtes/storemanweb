@@ -148,6 +148,49 @@ export class APIProvider {
     }
 
 
+    public async downloadAll() {
+        const opts = {
+            headers: {
+                "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "Authorization": "bearer " + this.claim.token
+            }
+        };
+
+        return fetch(this.url(this.download_url) + "/article", opts)
+            .then(resp => {
+                if (resp.status === 200) {
+                    return resp.blob();
+                } else if (resp.status === 401) {
+                    this.refresh_token()
+                        .then(r => {
+                            if (r === "OK")
+                                return this.downloadAll();
+                            else
+                                throw "Authentication failure";
+                        });
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.download = makeid(5);
+                a.href = url;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            });
+    }
+
+    
+
+    /* ------------------------------------- EMPTY STORAGE ----------------------------------- */
+
+    public async emptyStorage() {
+        return this.post(this.url(this.article_url) + "/storage/empty", {});    
+    }
+
+
     /* ------------------ LOGIN MANAGEMENT --------------- */
 
     private claim: IClaim = {

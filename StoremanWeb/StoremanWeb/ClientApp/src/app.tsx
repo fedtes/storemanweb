@@ -9,6 +9,7 @@ import { ArticleDetail } from "./pages/article_detail/index";
 import { ArticleGrid } from "./pages/article_grid/index";
 import { ArticleListGrid } from "./pages/articlelist_grid/index";
 import { ArticleListDetail } from "./pages/articlelist_detail/index";
+import { Configuration } from "./pages/config_page/index";
 
 const history = createBrowserHistory();
 
@@ -36,6 +37,10 @@ const App = () => {
                         <Navbar></Navbar>
                         <ArticleGrid></ArticleGrid>
                     </PrivateRoute>
+                    <PrivateRoute path={appPath("/config")}>
+                        <Navbar></Navbar>
+                        <Configuration></Configuration>
+                    </PrivateRoute>
 
                     <Route path={appPath("/")}>
                         <Redirect to={{ pathname: appPath("/articlelist") }}></Redirect>
@@ -60,6 +65,9 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" to={appPath("/article")}>Articoli</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to={appPath("/config")}>Altro</NavLink>
                     </li>
                 </ul>
             </div>
