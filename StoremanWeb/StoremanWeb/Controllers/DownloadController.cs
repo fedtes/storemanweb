@@ -33,7 +33,7 @@ namespace StoremanWeb.Controllers
         [HttpGet("article")]
         public async Task<ActionResult> DownloadAll()
         {
-            byte[] content = await excel.CreateArticleListExcel(-1);
+            byte[] content = await excel.ExportAllArticleExcel();
             return File(content,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "EX_ALL_" + DateTime.Now.ToString("yyyyMMddHHmm"));
